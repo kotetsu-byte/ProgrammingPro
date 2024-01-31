@@ -9,12 +9,12 @@ namespace ProgrammingPro.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserRepository : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
-        public UserRepository(IUserRepository userRepository, IMapper mapper)
+        public UserController(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
             _mapper = mapper;

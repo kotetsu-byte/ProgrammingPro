@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ProgrammingPro.Server.Dtos;
+using ProgrammingPro.Shared.Dtos;
 using ProgrammingPro.Server.Interfaces;
 using ProgrammingPro.Server.Models;
 
