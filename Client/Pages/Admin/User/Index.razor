@@ -1,0 +1,62 @@
+﻿@page "/admin/user"
+@inject NavigationManager _navigation
+
+<div>
+    <table>
+        <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Email</th>
+            <th>Имя пользователя</th>
+            <th>Детали</th>
+            <th>Изменить</th>
+            <th>Удалить</th>
+        </tr>
+        @foreach(var item in Users)
+        {
+            <tr>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.Email</td>
+                <td>@item.UserName</td>
+                <td><button @onclick="() => HandleDetailsClick(item.Id)">Детали</button></td>
+                <td><button @onclick="() => HandleEditClick(item.Id)">Изменить</button></td>
+                <td><button @onclick="() => HandleDeleteClick(item.Id)">Удалить</button></td>
+            </tr>
+        }
+    </table>
+    <br />
+    <button @onclick="() => HandleCreateClick()">Создать пользователя</button>
+</div>
+
+@code {
+    [Inject]
+    IUserRepository _userRepository { get; set; }
+
+    ICollection<UserDto> Users { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Users = await _userRepository.GetAllUsers();
+    }
+
+    void HandleDetailsClick(int? id)
+    {
+        _navigation.NavigateTo($"/admin/user/{id}");
+    }
+
+    void HandleEditClick(int? id)
+    {
+        _navigation.NavigateTo($"/admin/user/edit/{id}");
+    }
+
+    void HandleDeleteClick(int? id)
+    {
+        _navigation.NavigateTo($"/admin/user/delete/{id}");
+    }
+
+    void HandleCreateClick()
+    {
+        _navigation.NavigateTo("/admin/user/create");
+    }
+}

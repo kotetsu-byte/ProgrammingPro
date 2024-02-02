@@ -25,10 +25,11 @@ namespace ProgrammingPro.Server.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<UserCourse>()
+                .HasKey(uc => new { uc.UserId, uc.CourseId });
+            modelBuilder.Entity<UserCourse>()
                 .HasOne(c => c.Course)
                 .WithMany(uc => uc.UserCourses)
                 .HasForeignKey(u => u.UserId);
-
             modelBuilder.Entity<UserCourse>()
                 .HasOne(u => u.User)
                 .WithMany(uc => uc.UserCourses)

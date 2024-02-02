@@ -1,0 +1,40 @@
+﻿@page "/admin/course/delete/{Id:int}"
+@inject NavigationManager _navigation
+
+<div>
+    <EditForm Model="Model" OnSubmit="() => Submit()">
+        <div class="form-control">
+            <label>Название</label>
+            <input class="form-control" @bind-value="Model.Name" disabled/>
+        </div>
+        <div class="form-control">
+            <label>Описание</label>
+            <input class="form-control" @bind-value="Model.Description" disabled/>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-danger">Удалить</button>
+    </EditForm>
+</div>
+
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    [Inject]
+    ICourseRepository _courseRepository { get; set; }
+
+    CourseDto Model { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model = await _courseRepository.GetCourseById(Id);
+    }
+
+    void Submit()
+    {
+        _courseRepository.Delete(Id);
+
+        _navigation.NavigateTo("/admin/user");
+    }
+}

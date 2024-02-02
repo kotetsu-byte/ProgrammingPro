@@ -1,0 +1,58 @@
+﻿@page "/admin/course"
+@inject NavigationManager _navigation
+
+<div>
+    <table>
+        <tr>
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Детали</th>
+            <th>Изменить</th>
+            <th>Удалить</th>
+        </tr>
+        @foreach(var item in Courses)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td><button @onclick="() => HandleDetailsClick(item.Id)">Детали</button></td>
+                <td><button @onclick="() => HandleEditClick(item.Id)">Изменить</button></td>
+                <td><button @onclick="() => HandleDeleteClick(item.Id)">Удалить</button></td>
+            </tr>
+        }
+    </table>
+    <br />
+    <button @onclick="() => HandleCreateClick()">Создать пользователя</button>
+</div>
+
+@code {
+    [Inject]
+    ICourseRepository _courseRepository { get; set; }
+
+    ICollection<CourseDto> Courses { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Courses = await _courseRepository.GetAllCourses();
+    }
+
+    void HandleDetailsClick(int? id)
+    {
+        _navigation.NavigateTo($"/admin/course/{id}");
+    }
+
+    void HandleEditClick(int? id)
+    {
+        _navigation.NavigateTo($"/admin/course/edit/{id}");
+    }
+
+    void HandleDeleteClick(int? id)
+    {
+        _navigation.NavigateTo($"/admin/course/delete/{id}");
+    }
+
+    void HandleCreateClick()
+    {
+        _navigation.NavigateTo("/admin/course/create");
+    }
+}

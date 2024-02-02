@@ -65,18 +65,91 @@ namespace ProgrammingPro.Server.Migrations
                     b.ToTable("Lessons");
                 });
 
+            modelBuilder.Entity("ProgrammingPro.Server.Models.User", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
+
+                    b.Property<int?>("Email")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("ProgrammingPro.Server.Models.UserCourse", b =>
+                {
+                    b.Property<int?>("UserId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("CourseId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("UserId", "CourseId");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("UserCourses");
+                });
+
             modelBuilder.Entity("ProgrammingPro.Server.Models.Lesson", b =>
                 {
                     b.HasOne("ProgrammingPro.Server.Models.Course", "Course")
                         .WithMany("Lessons")
-                        .HasForeignKey("CourseId");
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("ProgrammingPro.Server.Models.UserCourse", b =>
+                {
+                    b.HasOne("ProgrammingPro.Server.Models.User", "User")
+                        .WithMany("UserCourses")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProgrammingPro.Server.Models.Course", "Course")
+                        .WithMany("UserCourses")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ProgrammingPro.Server.Models.Course", b =>
                 {
                     b.Navigation("Lessons");
+
+                    b.Navigation("UserCourses");
+                });
+
+            modelBuilder.Entity("ProgrammingPro.Server.Models.User", b =>
+                {
+                    b.Navigation("UserCourses");
                 });
 #pragma warning restore 612, 618
         }

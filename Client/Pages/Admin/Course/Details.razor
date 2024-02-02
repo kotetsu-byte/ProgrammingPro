@@ -1,0 +1,27 @@
+﻿@page "/admin/course/details/{Id:int}"
+
+<table>
+    <tr>
+        <th>Название</th>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <th>Описание</th>
+        <td>@Model.Description</td>
+    </tr>
+</table>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    [Inject]
+    ICourseRepository _courseRepository { get; set; }
+
+    CourseDto Model { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model = await _courseRepository.GetCourseById(Id);
+    }
+}
