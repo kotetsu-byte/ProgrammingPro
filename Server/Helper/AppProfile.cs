@@ -12,6 +12,12 @@ namespace ProgrammingPro.Server.Helper
             CreateMap<CourseDto, Course>();
             CreateMap<Lesson, LessonDto>();
             CreateMap<LessonDto, Lesson>();
+            CreateMap<Test, TestDto>();
+            CreateMap<TestDto, Test>();
+            CreateMap<Doc, DocDto>();
+            CreateMap<DocDto, Doc>();
+            CreateMap<Homework, HomeworkDto>();
+            CreateMap<HomeworkDto, Homework>();
             CreateMap<User, UserDto>();
             CreateMap<UserDto, User>();
             CreateMap<UserCourse, UserCourseDto>();

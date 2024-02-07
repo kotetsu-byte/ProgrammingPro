@@ -2,25 +2,34 @@
 @inject NavigationManager _navigation
 
 <div>
-    <table>
-        <tr>
-            <th>Название</th>
-            <th>Описание</th>
-            <th>Детали</th>
-            <th>Изменить</th>
-            <th>Удалить</th>
-        </tr>
-        @foreach(var item in Courses)
-        {
+    @if(Courses != null)
+    {
+        <table>
             <tr>
-                <td>@item.Name</td>
-                <td>@item.Description</td>
-                <td><button @onclick="() => HandleDetailsClick(item.Id)">Детали</button></td>
-                <td><button @onclick="() => HandleEditClick(item.Id)">Изменить</button></td>
-                <td><button @onclick="() => HandleDeleteClick(item.Id)">Удалить</button></td>
+                <th>Название</th>
+                <th>Описание</th>
+                <th>Уроки</th>
+                <th>Детали</th>
+                <th>Изменить</th>
+                <th>Удалить</th>
             </tr>
-        }
-    </table>
+            @foreach (var item in Courses)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td><button @onclick="() => HandleLessonsClick(item.Id)">Уроки</button></td>
+                    <td><button @onclick="() => HandleDetailsClick(item.Id)">Детали</button></td>
+                    <td><button @onclick="() => HandleEditClick(item.Id)">Изменить</button></td>
+                    <td><button @onclick="() => HandleDeleteClick(item.Id)">Удалить</button></td>
+                </tr>
+            }
+        </table>
+    } else
+    {
+        <p>Здесь ничего нет</p>
+    }
+
     <br />
     <button @onclick="() => HandleCreateClick()">Создать пользователя</button>
 </div>
@@ -34,6 +43,11 @@
     protected override async Task OnInitializedAsync()
     {
         Courses = await _courseRepository.GetAllCourses();
+    }
+
+    void HandleLessonsClick(int? id)
+    {
+        _navigation.NavigateTo($"/admin/lesson/{id}");
     }
 
     void HandleDetailsClick(int? id)

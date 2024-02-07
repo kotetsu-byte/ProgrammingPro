@@ -1,0 +1,36 @@
+﻿@page "/admin/lesson/create/{CourseId:int}"
+@inject NavigationManager _navigation
+
+<div>
+    <EditForm Model="Model" OnSubmit="() => Submit()">
+        <div class="form-control">
+            <label>Заголовок</label>
+            <input class="form-control" @bind-value="Model.Title" />
+        </div>
+        <div class="form-control">
+            <label>Текст</label>
+            <input class="form-control" @bind-value="Model.Text" />
+        </div>
+        <br />
+        <button type="submit" class="btn btn-info">Создать</button>
+    </EditForm>
+</div>
+
+@code {
+    [Parameter]
+    public int CourseId { get; set; }
+
+    [Inject]
+    ILessonRepository _lessonRepository { get; set; }
+
+    LessonDto Model { get; set; }
+
+    protected override void OnInitialized() => Model ??= new();
+
+    void Submit()
+    {
+        _lessonRepository.Create(Model, CourseId);
+
+        _navigation.NavigateTo($"/admin/lesson/{CourseId}");
+    }
+}

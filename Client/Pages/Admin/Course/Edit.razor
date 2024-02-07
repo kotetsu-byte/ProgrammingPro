@@ -1,4 +1,4 @@
-﻿@page "/admin/user/edit/{Id:int}"
+﻿@page "/admin/course/edit/{Id:int}"
 @inject NavigationManager _navigation
 
 <div>
@@ -34,6 +34,6 @@
     {
         _courseRepository.Update(Model);
 
-        _navigation.NavigateTo("/admin/user");
+        _navigation.NavigateTo("/admin/course");
     }
 }

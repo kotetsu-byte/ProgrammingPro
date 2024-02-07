@@ -1,26 +1,22 @@
-﻿@page "/admin/user"
+﻿@page "/admin/lesson/{CourseId:int}"
 @inject NavigationManager _navigation
 
 <div>
-    @if(Users != null)
+    @if(Lessons != null)
     {
         <table>
             <tr>
-                <th>Имя</th>
-                <th>Фамилия</th>
-                <th>Email</th>
-                <th>Имя пользователя</th>
+                <th>Заголовок</th>
+                <th>Текст</th>
                 <th>Детали</th>
                 <th>Изменить</th>
                 <th>Удалить</th>
             </tr>
-            @foreach (var item in Users)
+            @foreach (var item in Lessons)
             {
                 <tr>
-                    <td>@item.FirstName</td>
-                    <td>@item.LastName</td>
-                    <td>@item.Email</td>
-                    <td>@item.UserName</td>
+                    <td>@item.Title</td>
+                    <td>@item.Text</td>
                     <td><button @onclick="() => HandleDetailsClick(item.Id)">Детали</button></td>
                     <td><button @onclick="() => HandleEditClick(item.Id)">Изменить</button></td>
                     <td><button @onclick="() => HandleDeleteClick(item.Id)">Удалить</button></td>
@@ -29,7 +25,7 @@
         </table>
     } else
     {
-        <p>Здесь ничего нет</p>
+        <p>Здесть ничего нет</p>
     }
 
     <br />
@@ -37,33 +33,36 @@
 </div>
 
 @code {
-    [Inject]
-    IUserRepository _userRepository { get; set; }
+    [Parameter]
+    public int CourseId { get; set; }
 
-    ICollection<UserDto> Users { get; set; }
+    [Inject]
+    ILessonRepository? _lessonRepository { get; set; }
+
+    ICollection<LessonDto>? Lessons { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        Users = await _userRepository.GetAllUsers();
+        Lessons = await _lessonRepository.GetAllLessons(CourseId);
     }
 
     void HandleDetailsClick(int? id)
     {
-        _navigation.NavigateTo($"/admin/user/{id}");
+        _navigation.NavigateTo($"/admin/lesson/{CourseId}/{id}");
     }
 
     void HandleEditClick(int? id)
     {
-        _navigation.NavigateTo($"/admin/user/edit/{id}");
+        _navigation.NavigateTo($"/admin/lesson/edit/{CourseId}/{id}");
     }
 
     void HandleDeleteClick(int? id)
     {
-        _navigation.NavigateTo($"/admin/user/delete/{id}");
+        _navigation.NavigateTo($"/admin/lesson/delete/{CourseId}/{id}");
     }
 
     void HandleCreateClick()
     {
-        _navigation.NavigateTo("/admin/user/create");
+        _navigation.NavigateTo($"/admin/lesson/create/{CourseId}");
     }
 }
