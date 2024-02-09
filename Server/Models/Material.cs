@@ -3,17 +3,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProgrammingPro.Server.Models
 {
-    public class Lesson
+    public class Material
     {
         [Key]
         public int? Id { get; set; }
-        public string? Title { get; set; }
-        public string? Text { get; set; }
+        public string? MaterialName { get; set; }
+        [ForeignKey("Homework")]
+        public int? HomeworkId { get; set; }
+        public Homework? Homework { get; set; }
+        [ForeignKey("Lesson")]
+        public int? LessonId { get; set; }
+        public Lesson? Lesson { get; set; }
         [ForeignKey("Course")]
         public int? CourseId { get; set; }
         public Course? Course { get; set; }
-        public ICollection<Doc>? Docs { get; set; }
-        public ICollection<Video>? Videos { get; set; }
-        public ICollection<Homework>? Homeworks { get; set; }
     }
 }

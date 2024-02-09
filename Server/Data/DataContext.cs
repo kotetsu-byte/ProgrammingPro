@@ -14,7 +14,9 @@ namespace ProgrammingPro.Server.Data
         public DbSet<Lesson> Lessons { get; set; }
         public DbSet<Test> Tests { get; set; }
         public DbSet<Doc> Docs { get; set; }
+        public DbSet<Video> Videos { get; set; }
         public DbSet<Homework> Homeworks { get; set; }
+        public DbSet<Material> Materials { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserCourse> UserCourses { get; set; }
 
@@ -37,9 +39,19 @@ namespace ProgrammingPro.Server.Data
                 .WithMany(d => d.Docs)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<Video>()
+                .HasOne(l => l.Lesson)
+                .WithMany(v => v.Videos)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<Homework>()
                 .HasOne(l => l.Lesson)
                 .WithMany(h => h.Homeworks)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Material>()
+                .HasOne(h => h.Homework)
+                .WithMany(m => m.Materials)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<UserCourse>()
