@@ -1,0 +1,58 @@
+﻿@page "/admin/doc/edit/{CourseId:int}/{LessonId:int}/{Id:int}"
+@inject NavigationManager _navigation
+
+<div>
+    <EditForm Model="Model" OnSubmit="() => Submit()">
+        <div class="form-control">
+            <label>Документ</label>
+            <InputFile OnChange="@HandleFileInput" />
+        </div>
+        <br />
+        <button type="submit" class="btn btn-info">Изменить</button>
+    </EditForm>
+</div>
+
+@code {
+    [Parameter]
+    public int CourseId { get; set; }
+
+    [Parameter]
+    public int LessonId { get; set; }
+
+    [Parameter]
+    public int Id { get; set; }
+
+    [Inject]
+    IDocRepository _docRepository { get; set; }
+
+    DocDto Model { get; set; }
+
+    IBrowserFile File { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model = await _docRepository.GetDocById(CourseId, LessonId, Id);
+    }
+
+    void HandleFileInput(InputFileChangeEventArgs e)
+    {
+        File = e.File;
+        this.StateHasChanged();
+    }
+
+    async Task Submit()
+    {
+        Stream stream = File.OpenReadStream();
+        MemoryStream ms = new MemoryStream();
+        await stream.CopyToAsync(ms);
+        stream.Close();
+
+        Model.DocName = File.Name;
+        Model.DocContent = ms.ToArray();
+        ms.Close();
+
+        _docRepository.Update(Model);
+
+        _navigation.NavigateTo($"/admin/doc/{CourseId}/{LessonId}");
+    }
+}

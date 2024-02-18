@@ -1,0 +1,69 @@
+﻿@page "/admin/video/{CourseId:int}/{LessonId:int}"
+@inject NavigationManager _navigation
+
+<div>
+    @if(Videos != null)
+    {
+        <table>
+            <tr>
+                <th>Название видео</th>
+                <th>Детали</th>
+                <th>Изменить</th>
+                <th>Удалить</th>
+            </tr>
+            @foreach (var item in Videos)
+            {
+                <tr>
+                    <td>@item.VideoName</td>
+                    <td><button @onclick="() => HandleDetailsClick(item.Id)">Детали</button></td>
+                    <td><button @onclick="() => HandleEditClick(item.Id)">Изменить</button></td>
+                    <td><button @onclick="() => HandleDeleteClick(item.Id)">Удалить</button></td>
+                </tr>
+            }
+        </table>
+    } else
+    {
+        <p>Здесть ничего нет</p>
+    }
+
+    <br />
+    <button @onclick="() => HandleCreateClick()">Создать видео</button>
+</div>
+
+@code {
+    [Parameter]
+    public int CourseId { get; set; }
+
+    [Parameter]
+    public int LessonId { get; set; }
+
+    [Inject]
+    IVideoRepository? _videoRepository { get; set; }
+
+    ICollection<VideoDto>? Videos { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Videos = await _videoRepository.GetAllVideos(CourseId, LessonId);
+    }
+
+    void HandleDetailsClick(int? id)
+    {
+        _navigation.NavigateTo($"/admin/video/{CourseId}/{LessonId}/{id}");
+    }
+
+    void HandleEditClick(int? id)
+    {
+        _navigation.NavigateTo($"/admin/video/edit/{CourseId}/{LessonId}/{id}");
+    }
+
+    void HandleDeleteClick(int? id)
+    {
+        _navigation.NavigateTo($"/admin/video/delete/{CourseId}/{LessonId}/{id}");
+    }
+
+    void HandleCreateClick()
+    {
+        _navigation.NavigateTo($"/admin/video/create/{CourseId}/{LessonId}");
+    }
+}

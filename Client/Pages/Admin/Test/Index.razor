@@ -1,0 +1,78 @@
+﻿@page "/admin/test/{CourseId:int}"
+@inject NavigationManager _navigation
+
+<div>
+    @if(Lessons != null)
+    {
+        <table>
+            <tr>
+                <th>Вопрос</th>
+                <th>Ответ 1</th>
+                <th>Ответ 2</th>
+                <th>Ответ 3</th>
+                <th>Ответ 4</th>
+                <th>Правильный ответ</th>
+                <th>Баллы</th>
+                <th>Детали</th>
+                <th>Изменить</th>
+                <th>Удалить</th>
+            </tr>
+            @foreach (var item in Tests)
+            {
+                <tr>
+                    <td>@item.Question</td>
+                    <td>@item.Answer1</td>
+                    <td>@item.Answer2</td>
+                    <td>@item.Answer3</td>
+                    <td>@item.Answer4</td>
+                    <td>@item.CorrectAnswer</td>
+                    <td>@item.Points</td>
+                    <td><button @onclick="() => HandleDetailsClick(item.Id)">Детали</button></td>
+                    <td><button @onclick="() => HandleEditClick(item.Id)">Изменить</button></td>
+                    <td><button @onclick="() => HandleDeleteClick(item.Id)">Удалить</button></td>
+                </tr>
+            }
+        </table>
+    } else
+    {
+        <p>Здесть ничего нет</p>
+    }
+
+    <br />
+    <button @onclick="() => HandleCreateClick()">Создать пользователя</button>
+</div>
+
+@code {
+    [Parameter]
+    public int CourseId { get; set; }
+
+    [Inject]
+    ITestRepository? _testRepository { get; set; }
+
+    ICollection<TestDto>? Tests { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Tests = await _testRepository.GetAllTests(CourseId);
+    }
+
+    void HandleDetailsClick(int? id)
+    {
+        _navigation.NavigateTo($"/admin/test/{CourseId}/{id}");
+    }
+
+    void HandleEditClick(int? id)
+    {
+        _navigation.NavigateTo($"/admin/test/edit/{CourseId}/{id}");
+    }
+
+    void HandleDeleteClick(int? id)
+    {
+        _navigation.NavigateTo($"/admin/test/delete/{CourseId}/{id}");
+    }
+
+    void HandleCreateClick()
+    {
+        _navigation.NavigateTo($"/admin/test/create/{CourseId}");
+    }
+}

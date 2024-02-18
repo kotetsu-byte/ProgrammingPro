@@ -1,0 +1,29 @@
+﻿@page "/admin/doc/details/{CourseId:int}/{LessonId:int}/{Id:int}"
+
+<table>
+    <tr>
+        <th>Название документа</th>
+        <td>@Model.DocName</td>
+    </tr>
+</table>
+
+@code {
+    [Parameter]
+    public int CourseId { get; set; }
+
+    [Parameter]
+    public int LessonId { get; set; }
+
+    [Parameter]
+    public int Id { get; set; }
+
+    [Inject]
+    IDocRepository _docRepository { get; set; }
+
+    DocDto Model { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model = await _docRepository.GetDocById(CourseId, LessonId, Id);
+    }
+}

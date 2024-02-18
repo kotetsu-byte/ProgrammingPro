@@ -1,0 +1,50 @@
+﻿@page "/admin/video/delete/{CourseId:int}/{LessonId:int}/{Id:int}"
+@inject NavigationManager _navigation
+
+<div>
+    <EditForm Model="Model" OnSubmit="() => Submit()">
+        <div class="form-control">
+            <label>Видео</label>
+            <InputFile OnChange="@HandleFileInput" disabled />
+        </div>
+        <br />
+        <button type="submit" class="btn btn-danger">Удалить</button>
+    </EditForm>
+</div>
+
+
+@code {
+    [Parameter]
+    public int CourseId { get; set; }
+
+    [Parameter]
+    public int LessonId { get; set; }
+
+    [Parameter]
+    public int Id { get; set; }
+
+    [Inject]
+    IVideoRepository _videoRepository { get; set; }
+
+    VideoDto Model { get; set; }
+
+    IBrowserFile File { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model = await _videoRepository.GetVideoById(CourseId, LessonId, Id);
+    }
+
+    void HandleFileInput(InputFileChangeEventArgs e)
+    {
+        File = e.File;
+        this.StateHasChanged();
+    }
+
+    void Submit()
+    {
+        _videoRepository.Delete(Id);
+
+        _navigation.NavigateTo($"/admin/video/{CourseId}/{LessonId}");
+    }
+}

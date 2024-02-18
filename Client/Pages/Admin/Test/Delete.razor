@@ -1,0 +1,63 @@
+﻿@page "/admin/test/delete/{CourseId:int}/{Id:int}"
+@inject NavigationManager _navigation
+
+<div>
+    <EditForm Model="Model" OnSubmit="() => Submit()">
+        <div class="form-control">
+            <label>Вопрос</label>
+            <input class="form-control" @bind-value="Model.Question" disabled />
+        </div>
+        <div class="form-control">
+            <label>Ответ 1</label>
+            <input class="form-control" @bind-value="Model.Answer1" disabled />
+        </div>
+        <div class="form-control">
+            <label>Ответ 2</label>
+            <input class="form-control" @bind-value="Model.Answer2" disabled />
+        </div>
+        <div class="form-control">
+            <label>Ответ 3</label>
+            <input class="form-control" @bind-value="Model.Answer3" disabled />
+        </div>
+        <div class="form-control">
+            <label>Ответ 4</label>
+            <input class="form-control" @bind-value="Model.Answer4" disabled />
+        </div>
+        <div class="form-control">
+            <label>Правильный ответ</label>
+            <input class="form-control" @bind-value="Model.CorrectAnswer" disabled />
+        </div>
+        <div class="form-control">
+            <label>Баллы</label>
+            <input class="form-control" @bind-value="Model.Points" disabled />
+        </div>
+        <br />
+        <button type="submit" class="btn btn-danger">Удалить</button>
+    </EditForm>
+</div>
+
+
+@code {
+    [Parameter]
+    public int CourseId { get; set; }
+
+    [Parameter]
+    public int Id { get; set; }
+
+    [Inject]
+    ITestRepository _testRepository { get; set; }
+
+    TestDto Model { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model = await _testRepository.GetTestById(CourseId, Id);
+    }
+
+    void Submit()
+    {
+        _testRepository.Delete(Id);
+
+        _navigation.NavigateTo($"/admin/test/{CourseId}");
+    }
+}

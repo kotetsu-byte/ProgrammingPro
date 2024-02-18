@@ -1,0 +1,29 @@
+﻿@page "/admin/video/details/{CourseId:int}/{LessonId:int}/{Id:int}"
+
+<table>
+    <tr>
+        <th>Название видео</th>
+        <td>@Model.VideoName</td>
+    </tr>
+</table>
+
+@code {
+    [Parameter]
+    public int CourseId { get; set; }
+
+    [Parameter]
+    public int LessonId { get; set; }
+
+    [Parameter]
+    public int Id { get; set; }
+
+    [Inject]
+    IVideoRepository _videoRepository { get; set; }
+
+    VideoDto Model { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model = await _videoRepository.GetVideoById(CourseId, LessonId, Id);
+    }
+}

@@ -10,6 +10,7 @@ namespace ProgrammingPro.Shared.Dtos
     {
         public int? Id { get; set; }
         public string? DocName { get; set; }
+        public byte[]? DocContent { get; set; }
         public int? LessonId { get; set; }
         public int? CourseId { get; set; }
     }
