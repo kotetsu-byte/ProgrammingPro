@@ -1,0 +1,73 @@
+﻿@page "/admin/homework/{CourseId:int}/{LessonId:int}"
+@inject NavigationManager _navigation
+
+<div>
+    @if(Homeworks != null)
+    {
+        <table>
+            <tr>
+                <th>Заголовок</th>
+                <th>Содержание</th>
+                <th>Срок сдачи</th>
+                <th>Детали</th>
+                <th>Изменить</th>
+                <th>Удалить</th>
+            </tr>
+            @foreach (var item in Homeworks)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Content</td>
+                    <td>@item.Deadline</td>
+                    <td><button @onclick="() => HandleDetailsClick(item.Id)">Детали</button></td>
+                    <td><button @onclick="() => HandleEditClick(item.Id)">Изменить</button></td>
+                    <td><button @onclick="() => HandleDeleteClick(item.Id)">Удалить</button></td>
+                </tr>
+            }
+        </table>
+    } else
+    {
+        <p>Здесть ничего нет</p>
+    }
+
+    <br />
+    <button @onclick="() => HandleCreateClick()">Создать документ</button>
+</div>
+
+@code {
+    [Parameter]
+    public int CourseId { get; set; }
+
+    [Parameter]
+    public int LessonId { get; set; }
+
+    [Inject]
+    IHomeworkRepository? _homeworkRepository { get; set; }
+
+    ICollection<HomeworkDto>? Homeworks { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Homeworks = await _homeworkRepository.GetAllHomeworks(CourseId, LessonId);
+    }
+
+    void HandleDetailsClick(int? id)
+    {
+        _navigation.NavigateTo($"/admin/homework/{CourseId}/{LessonId}/{id}");
+    }
+
+    void HandleEditClick(int? id)
+    {
+        _navigation.NavigateTo($"/admin/homework/edit/{CourseId}/{LessonId}/{id}");
+    }
+
+    void HandleDeleteClick(int? id)
+    {
+        _navigation.NavigateTo($"/admin/homework/delete/{CourseId}/{LessonId}/{id}");
+    }
+
+    void HandleCreateClick()
+    {
+        _navigation.NavigateTo($"/admin/homework/create/{CourseId}/{LessonId}");
+    }
+}

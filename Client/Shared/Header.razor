@@ -1,0 +1,29 @@
+﻿@inject NavigationManager _navigation
+
+<div style="width: 100%; display: flex; flex-direction: row; justify-content: space-between;">
+    <nav>
+        <ul style="list-style-type: none;">
+            <li style="display: inline;"><a href="/">Главная</a></li>
+            <li style="display: inline;"><a href="/courses">Курсы</a></li>
+            <li style="display: inline;"><a href="/my-courses">Мои курсы</a></li>
+            <li style="display: inline;"><a href="/about">О нас</a></li>
+            <li style="display: inline;"><a href="/contacts">Контакты</a></li>
+        </ul>
+    </nav>
+    <nav>
+        <button @onclick="() => Login()">Войти</button>
+        <button @onclick="() => Register()">Зарегистрироваться</button>
+    </nav>
+</div>
+
+@code {
+    void Register()
+    {
+        _navigation.NavigateTo("/register");
+    }
+
+    void Login()
+    {
+        _navigation.NavigateTo("/login");
+    }
+}

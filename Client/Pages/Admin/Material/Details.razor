@@ -1,0 +1,32 @@
+﻿@page "/admin/material/details/{CourseId:int}/{LessonId:int}/{HomeworkId:int}/{Id:int}"
+
+<table>
+    <tr>
+        <th>Название материала</th>
+        <td>@Model.MaterialName</td>
+    </tr>
+</table>
+
+@code {
+    [Parameter]
+    public int CourseId { get; set; }
+
+    [Parameter]
+    public int LessonId { get; set; }
+
+    [Parameter]
+    public int HomeworkId { get; set; }
+
+    [Parameter]
+    public int Id { get; set; }
+
+    [Inject]
+    IMaterialRepository _materialRepository { get; set; }
+
+    MaterialDto Model { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model = await _materialRepository.GetMaterialById(CourseId, LessonId, HomeworkId, Id);
+    }
+}

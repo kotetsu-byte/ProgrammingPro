@@ -2,8 +2,43 @@
 
 <PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
+<div style="margin: 60px 120px;">
+    <header style="background-color: white; border: 5px solid green; border-radius: 10px;">
+        <h1 style="text-align: center;">
+            Добро пожаловать<br>в образовательный портал<br>ProgrammingPro!
+        </h1>
+    </header>
+    <div style="background-color: white; border: 5px solid red; border-radius: 10px;">
+        <h2>Курсы</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
+            @foreach(var item in Courses)
+            {
+                <div>
+                    <img src="@item.ImgName" /><br />
+                    <h3>@item.Name</h3>
+                    <p>@item.Description</p>
+                </div>
+            }
+        </div>
+    </div>
+    <div style="background-color: white; border: 5px solid blue; border-radius: 10px;">
+        <h2>Мои курсы</h2>
+    </div>
+</div>
 
-Welcome to your new app.
+@code {
+    [Inject]
+    ICourseRepository _courseRepository { get; set; }
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+    ICollection<CourseDto> Courses { get; set; }
+
+    [Inject]
+    IUserCourseRepository _userCourseRepository { get; set; }
+
+    UserCourseDto UserCourse { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Courses = await _courseRepository.GetAllCourses();
+    }
+}

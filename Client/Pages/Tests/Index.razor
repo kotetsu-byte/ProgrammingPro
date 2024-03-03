@@ -1,0 +1,16 @@
+﻿@page "/tests/{CourseId:int}"
+
+@code {
+    [Parameter]
+    public int CourseId { get; set; }
+
+    [Inject]
+    ITestRepository _testRepository { get; set; }
+
+    ICollection<TestDto> Tests { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Tests = await _testRepository.GetAllTests(CourseId);
+    }
+}

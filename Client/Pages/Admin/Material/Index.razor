@@ -1,0 +1,72 @@
+﻿@page "/admin/material/{CourseId:int}/{LessonId:int}/{HomeworkId:int}"
+@inject NavigationManager _navigation
+
+<div>
+    @if(Materials != null)
+    {
+        <table>
+            <tr>
+                <th>Название материала</th>
+                <th>Детали</th>
+                <th>Изменить</th>
+                <th>Удалить</th>
+            </tr>
+            @foreach (var item in Materials)
+            {
+                <tr>
+                    <td>@item.MaterialName</td>
+                    <td><button @onclick="() => HandleDetailsClick(item.Id)">Детали</button></td>
+                    <td><button @onclick="() => HandleEditClick(item.Id)">Изменить</button></td>
+                    <td><button @onclick="() => HandleDeleteClick(item.Id)">Удалить</button></td>
+                </tr>
+            }
+        </table>
+    } else
+    {
+        <p>Здесть ничего нет</p>
+    }
+
+    <br />
+    <button @onclick="() => HandleCreateClick()">Создать документ</button>
+</div>
+
+@code {
+    [Parameter]
+    public int CourseId { get; set; }
+
+    [Parameter]
+    public int LessonId { get; set; }
+
+    [Parameter]
+    public int HomeworkId { get; set; }
+
+    [Inject]
+    IMaterialRepository? _materialRepository { get; set; }
+
+    ICollection<MaterialDto>? Materials { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Materials = await _materialRepository.GetAllMaterials(CourseId, LessonId, HomeworkId);
+    }
+
+    void HandleDetailsClick(int? id)
+    {
+        _navigation.NavigateTo($"/admin/material/{CourseId}/{LessonId}/{HomeworkId}/{id}");
+    }
+
+    void HandleEditClick(int? id)
+    {
+        _navigation.NavigateTo($"/admin/material/edit/{CourseId}/{LessonId}/{HomeworkId}/{id}");
+    }
+
+    void HandleDeleteClick(int? id)
+    {
+        _navigation.NavigateTo($"/admin/material/delete/{CourseId}/{LessonId}/{HomeworkId}/{id}");
+    }
+
+    void HandleCreateClick()
+    {
+        _navigation.NavigateTo($"/admin/material/create/{CourseId}/{LessonId}/{HomeworkId}");
+    }
+}

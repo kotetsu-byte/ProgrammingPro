@@ -1,0 +1,49 @@
+﻿@page "/admin/homework/edit/{CourseId:int}/{LessonId:int}/{Id:int}"
+@inject NavigationManager _navigation
+
+<div>
+    <EditForm Model="Model" OnSubmit="() => Submit()">
+        <div class="form-control">
+            <label>Заголовок</label>
+            <input type="text" class="form-control" @bind-value="Model.Title" />
+        </div>
+        <div class="form-control">
+            <label>Содержание</label>
+            <input type="text" class="form-control" @bind-value="Model.Content" />
+        </div>
+        <div class="form-control">
+            <label>Срок сдачи</label>
+            <InputDate class="form-control" Value="Model.Deadline" />
+        </div>
+        <br />
+        <button type="submit" class="btn btn-info">Изменить</button>
+    </EditForm>
+</div>
+
+@code {
+    [Parameter]
+    public int CourseId { get; set; }
+
+    [Parameter]
+    public int LessonId { get; set; }
+
+    [Parameter]
+    public int Id { get; set; }
+
+    [Inject]
+    IHomeworkRepository _homeworkRepository { get; set; }
+
+    HomeworkDto Model { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model = await _homeworkRepository.GetHomeworkById(CourseId, LessonId, Id);
+    }
+
+    void Submit()
+    {
+        _homeworkRepository.Update(Model);
+
+        _navigation.NavigateTo($"/admin/homework/{CourseId}/{LessonId}");
+    }
+}
