@@ -1,4 +1,5 @@
 ﻿@page "/"
+@inject NavigationManager _navigation
 
 <PageTitle>Index</PageTitle>
 
@@ -17,12 +18,16 @@
                     <img src="@item.ImgName" /><br />
                     <h3>@item.Name</h3>
                     <p>@item.Description</p>
+                    <button @onclick="() => GoToCourse(item.Id)">Перейти</button>
                 </div>
             }
         </div>
     </div>
     <div style="background-color: white; border: 5px solid blue; border-radius: 10px;">
         <h2>Мои курсы</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
+
+        </div>
     </div>
 </div>
 
@@ -40,5 +45,10 @@
     protected override async Task OnInitializedAsync()
     {
         Courses = await _courseRepository.GetAllCourses();
+    }
+
+    void GoToCourse(int? id)
+    {
+        _navigation.NavigateTo($"/course/{id}");
     }
 }

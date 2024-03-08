@@ -1,0 +1,77 @@
+﻿@page "/lesson/{CourseId:int}/{Id:int}"
+@inject NavigationManager _navigation
+
+<PageTitle>@Model.Title</PageTitle>
+
+<div style="padding: 60px 120px;">
+    <div style="background-color: white; border: 5px solid red; border-radius: 10px;">
+        <h1 style="text-align: center;">@Model.Title</h1>
+        <p>@Model.Text</p>
+    </div>
+    <div style="background-color: white; border: 5px solid green; border-radius: 10px;">
+        <h3>Видео</h3>
+        @foreach(var item in Videos)
+        {
+            <video src="@item.VideoName"></video>
+        }
+    </div>
+    <div style="background-color: white; border: 5px solid blue; border-radius: 10px;">
+        <h3>Документы</h3>
+        @foreach(var item in Docs)
+        {
+            <a href="@item.DocName" download>@item.DocName</a>
+        }
+    </div>
+    <div style="background-color: white; border: 5px solid purple; border-radius: 10px;">
+        <h3>Домашние задания</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
+            @foreach(var item in Homeworks)
+            {
+                <div @onclick="() => GoToHomework(item.Id)" style="background-color: lightblue; border: 3px solid brown; border-radius: 5px;">
+                    <h3>@item.Title</h3>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int CourseId { get; set; }
+
+    [Parameter]
+    public int Id { get; set; }
+
+    [Inject]
+    ILessonRepository _lessonRepository { get; set; }
+
+    LessonDto Model { get; set; }
+
+    [Inject]
+    IDocRepository _docRepository { get; set; }
+
+    ICollection<DocDto> Docs { get; set; }
+
+    [Inject]
+    IVideoRepository _videoRepository { get; set; }
+
+    ICollection<VideoDto> Videos { get; set; }
+
+    [Inject]
+    IHomeworkRepository _homeworkRepository { get; set; }
+
+    ICollection<HomeworkDto> Homeworks { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model = await _lessonRepository.GetLessonById(CourseId, Id);
+        Docs = await _docRepository.GetAllDocs(CourseId, Id);
+        Videos = await _videoRepository.GetAllVideos(CourseId, Id);
+        Homeworks = await _homeworkRepository.GetAllHomeworks(CourseId, Id);
+    }
+
+    void GoToHomework(int? id)
+    {
+        _navigation.NavigateTo($"/homework/{CourseId}/{Id}/{id}");
+    }
+}

@@ -1,6 +1,22 @@
 ﻿@page "/course/{Id:int}"
+@inject NavigationManager _navigation
 
 <PageTitle>@Model.Name</PageTitle>
+
+<div style="padding: 60px 120px;">
+    <div style="background-color: white; border: 5px solid red; border-radius: 10px;">
+        <h1 style="text-align: center;">@Model.Name</h1>
+        <p style="text-align: center;">@Model.Description</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
+            @foreach(var item in Lessons)
+            {
+                <div @onclick="() => GoToLesson(item.Id)" style="background-color: orange; border: 3px solid purple; border-radius: 5px; padding: 10px;">
+                    <h3>@item.Title</h3>
+                </div>
+            }
+        </div>
+    </div>
+</div>
 
 @code {
     [Parameter]
@@ -11,8 +27,19 @@
 
     CourseDto Model { get; set; }
 
+    [Inject]
+    ILessonRepository _lessonRepository { get; set; }
+
+    ICollection<LessonDto> Lessons { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         Model = await _courseRepository.GetCourseById(Id);
+        Lessons = await _lessonRepository.GetAllLessons(Id);
+    }
+
+    void GoToLesson(int? id)
+    {
+        _navigation.NavigateTo($"/lesson/{Id}/{id}");
     }
 }
