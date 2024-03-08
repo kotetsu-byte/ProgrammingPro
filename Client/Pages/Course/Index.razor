@@ -37,7 +37,7 @@
         Model = await _courseRepository.GetCourseById(Id);
         Lessons = await _lessonRepository.GetAllLessons(Id);
     }
-
+    
     void GoToLesson(int? id)
     {
         _navigation.NavigateTo($"/lesson/{Id}/{id}");
