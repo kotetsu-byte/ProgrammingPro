@@ -4,27 +4,30 @@
 <PageTitle>Index</PageTitle>
 
 <div style="margin: 60px 120px;">
-    <header style="background-color: white; border: 5px solid green; border-radius: 10px;">
+    <div style="background-color: white; border: 5px solid green; border-radius: 10px; padding: 10px;">
         <h1 style="text-align: center;">
             Добро пожаловать<br>в образовательный портал<br>ProgrammingPro!
         </h1>
-    </header>
-    <div style="background-color: white; border: 5px solid red; border-radius: 10px;">
-        <h2>Курсы</h2>
+    </div>
+    <div style="background-color: white; border: 5px solid red; border-radius: 10px; padding: 10px;">
+        <h2 style="text-align: center;">Курсы</h2>
         <div style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
-            @foreach(var item in Courses)
+            @if(Courses != null)
             {
-                <div>
-                    <img src="@item.ImgName" /><br />
-                    <h3>@item.Name</h3>
-                    <p>@item.Description</p>
-                    <button @onclick="() => GoToCourse(item.Id)">Перейти</button>
-                </div>
+                @foreach (var item in Courses)
+                {
+                    <div>
+                        <img src="@item.ImgName" /><br />
+                        <h3>@item.Name</h3>
+                        <p>@item.Description</p>
+                        <button @onclick="() => GoToCourse(item.Id)">Перейти</button>
+                    </div>
+                }
             }
         </div>
     </div>
-    <div style="background-color: white; border: 5px solid blue; border-radius: 10px;">
-        <h2>Мои курсы</h2>
+    <div style="background-color: white; border: 5px solid blue; border-radius: 10px; padding: 10px;">
+        <h2 style="text-align: center;">Мои курсы</h2>
         <div style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
 
         </div>
@@ -40,7 +43,7 @@
     [Inject]
     IUserCourseRepository _userCourseRepository { get; set; }
 
-    UserCourseDto UserCourse { get; set; }
+    ICollection<UserCourseDto> UserCourses { get; set; }
 
     protected override async Task OnInitializedAsync()
     {

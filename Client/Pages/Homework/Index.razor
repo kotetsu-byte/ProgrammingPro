@@ -1,0 +1,49 @@
+﻿@page "/homework/{CourseId:int}/{LessonId:int}/{Id:int}"
+@inject NavigationManager _navigation
+
+<PageTitle>@Model.Title</PageTitle>
+
+<div style="padding: 60px 120px;">
+    <div style="background-color: white; border: 5px solid red; border-radius: 10px; padding: 20px;">
+        <h3 style="text-align: center;">@Model.Title</h3>
+        <p>@Model.Content</p>
+        <p>Срок сдачи: @Model.Deadline</p>
+    </div>
+    <div>
+        <EditForm >
+            <label>Загрузить домашнее задание: </label>
+            <InputFile OnChange="@FileInput" />
+            <br />
+            <input type="submit" value="Добавить ответ на задание" />
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int CourseId { get; set; }
+
+    [Parameter]
+    public int LessonId { get; set; }
+
+    [Parameter]
+    public int Id { get; set; }
+
+    [Inject]
+    IHomeworkRepository _homeworkRepository { get; set; }
+
+    HomeworkDto Model { get;set; }
+
+    IBrowserFile File { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model = await _homeworkRepository.GetHomeworkById(CourseId, LessonId, Id);
+    }
+
+    void FileInput(InputFileChangeEventArgs e)
+    {
+        File = e.File;
+        this.StateHasChanged();
+    }
+}

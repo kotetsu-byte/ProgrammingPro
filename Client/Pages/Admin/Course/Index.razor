@@ -9,6 +9,7 @@
                 <th>Название</th>
                 <th>Описание</th>
                 <th>Уроки</th>
+                <th>Тесты</th>
                 <th>Детали</th>
                 <th>Изменить</th>
                 <th>Удалить</th>
@@ -19,7 +20,7 @@
                     <td>@item.Name</td>
                     <td>@item.Description</td>
                     <td><button @onclick="() => HandleLessonsClick(item.Id)">Уроки</button></td>
-                    <td><button @onclick="() => HandleTestsClick(item.Id)"></button></td>
+                    <td><button @onclick="() => HandleTestsClick(item.Id)">Тесты</button></td>
                     <td><button @onclick="() => HandleDetailsClick(item.Id)">Детали</button></td>
                     <td><button @onclick="() => HandleEditClick(item.Id)">Изменить</button></td>
                     <td><button @onclick="() => HandleDeleteClick(item.Id)">Удалить</button></td>

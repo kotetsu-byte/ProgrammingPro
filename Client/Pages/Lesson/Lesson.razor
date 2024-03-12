@@ -10,26 +10,35 @@
     </div>
     <div style="background-color: white; border: 5px solid green; border-radius: 10px;">
         <h3>Видео</h3>
-        @foreach(var item in Videos)
+        @if(Videos != null)
         {
-            <video src="@item.VideoName"></video>
+            @foreach (var item in Videos)
+            {
+                <video src="@item.VideoName"></video>
+            }
         }
     </div>
     <div style="background-color: white; border: 5px solid blue; border-radius: 10px;">
         <h3>Документы</h3>
-        @foreach(var item in Docs)
+        @if(Docs != null)
         {
-            <a href="@item.DocName" download>@item.DocName</a>
+            @foreach (var item in Docs)
+            {
+                <a href="@item.DocName" download>@item.DocName</a>
+            }
         }
     </div>
     <div style="background-color: white; border: 5px solid purple; border-radius: 10px;">
         <h3>Домашние задания</h3>
         <div style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
-            @foreach(var item in Homeworks)
+            @if(Homeworks != null)
             {
-                <div @onclick="() => GoToHomework(item.Id)" style="background-color: lightblue; border: 3px solid brown; border-radius: 5px;">
-                    <h3>@item.Title</h3>
-                </div>
+                @foreach (var item in Homeworks)
+                {
+                    <div @onclick="() => GoToHomework(item.Id)" style="background-color: lightblue; border: 3px solid brown; border-radius: 5px;">
+                        <h3>@item.Title</h3>
+                    </div>
+                }
             }
         </div>
     </div>

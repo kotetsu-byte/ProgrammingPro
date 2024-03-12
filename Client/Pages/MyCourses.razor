@@ -2,6 +2,18 @@
 
 <PageTitle>Мои курсы</PageTitle>
 
-@code {
+<div style="padding: 60px 120px;">
 
+</div>
+
+@code {
+    [Inject]
+    IUserCourseRepository _userCourseRepository { get; set; }
+
+    ICollection<UserCourseDto> UserCourses { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        UserCourses = await _userCourseRepository.GetAllUserCourses();
+    }
 }

@@ -23,6 +23,11 @@
 
   <ItemGroup>
     <Folder Include="Pages\Admin\Lesson\" />
+    <Folder Include="wwwroot\docs\" />
+    <Folder Include="wwwroot\materials\" />
+    <Folder Include="wwwroot\courses\" />
+    <Folder Include="wwwroot\users\" />
+    <Folder Include="wwwroot\vidoes\" />
   </ItemGroup>
 
   <ItemGroup>

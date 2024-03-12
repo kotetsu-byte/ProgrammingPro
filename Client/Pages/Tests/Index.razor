@@ -1,5 +1,25 @@
 ﻿@page "/tests/{CourseId:int}"
 
+<div style="padding: 60px 120px;">
+    <div style="background-color: white; border: 5px solid red; border-radius: 10px; padding: 20px;">
+        <p>@Model.Question</p>
+        <br />
+        <p>@Model.Answer1</p>
+        <p>@Model.Answer2</p>
+        <p>@Model.Answer3</p>
+        <p>@Model.Answer4</p>
+        <br />
+        @if(Model != Tests.FirstOrDefault())
+        {
+            <button @onclick="() => PrevQuestion(Model.Id)">Предыдущий</button>
+        }
+        @if(Model != Tests.LastOrDefault())
+        {
+            <button @onclick="() => NextQuestion(Model.Id)">Следующий</button>
+        }
+    </div>
+</div>
+
 @code {
     [Parameter]
     public int CourseId { get; set; }
@@ -9,8 +29,23 @@
 
     ICollection<TestDto> Tests { get; set; }
 
+    TestDto Model { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         Tests = await _testRepository.GetAllTests(CourseId);
+        Model = Tests.FirstOrDefault();
+    }
+
+    void PrevQuestion(int? id)
+    {
+        var Models = Tests.ToArray();
+        Model = Models[(int)id - 1];
+    }
+
+    void NextQuestion(int? id)
+    {
+        var Models = Tests.ToArray();
+        Model = Models[(int)id + 1];
     }
 }
