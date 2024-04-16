@@ -27,6 +27,34 @@ namespace ProgrammingPro.Client.Repositories
             return await response.Content.ReadFromJsonAsync<UserDto>();
         }
 
+        public async Task<bool> UserCheck(UserDto userDto)
+        {
+            var response = await _http.PostAsJsonAsync("api/User/check", userDto);
+
+            return await response.Content.ReadFromJsonAsync<bool>();
+        }
+
+        public async Task<bool> UserExists(UserDto userDto)
+        {
+            var response = await _http.PostAsJsonAsync("api/User/exists", userDto);
+
+            return await response.Content.ReadFromJsonAsync<bool>();
+        }
+
+        public async Task<bool> IsAdmin(UserDto userDto)
+        {
+            var response = await _http.PostAsJsonAsync("api/User/is-admin", userDto);
+
+            return await response.Content.ReadFromJsonAsync<bool>();
+        }
+
+        public async Task<bool> IsUser(UserDto userDto)
+        {
+            var response = await _http.PostAsJsonAsync("api/User/is-user", userDto);
+
+            return await response.Content.ReadFromJsonAsync<bool>();
+        }
+
         public async Task<string> Create(UserDto userDto)
         {
             var response = await _http.PostAsJsonAsync("api/User", userDto);

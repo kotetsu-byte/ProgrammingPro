@@ -24,6 +24,54 @@ namespace ProgrammingPro.Server.Repositories
             return await _context.Users.Where(u => u.Id == id).FirstOrDefaultAsync();
         }
 
+        public bool UserCheck(User user)
+        {
+            if (_context.Users.Any(u => u.UserName == user.UserName && u.PasswordHash == user.PasswordHash))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool UserExists(User user)
+        {
+            if(_context.Users.Any(u => u.UserName == user.UserName))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool IsAdmin(User user)
+        {
+            if(user.Role == "Admin")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool IsUser(User user)
+        {
+            if(user.Role == "User")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool Create(User user)
         {
             _context.Users.Add(user);

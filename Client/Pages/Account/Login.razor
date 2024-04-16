@@ -1,7 +1,45 @@
 ﻿@page "/login"
+@inject NavigationManager _navigation
 
-
+<div style="padding: 60px 120px;">
+    <div style="margin: auto; width: 500px;">
+        <EditForm Model="@Model" OnSubmit="() => Submit()">
+            <div class="form-control">
+                <label>Логин</label>
+                <input class="form-control" @bind-value="Model.UserName" />
+            </div>
+            <div class="form-control">
+                <label>Пароль</label>
+                <input class="form-control" @bind-value="Model.Password" />
+            </div>
+            <button type="submit">Войти</button>
+        </EditForm>
+        <p class="text-danger">@WarningMessage</p>
+    </div>
+</div>
 
 @code {
+    [Inject]
+    IUserRepository _userRepository { get; set; }
 
+    UserDto Model { get; set; }
+
+    protected override void OnInitialized() => Model ??= new();
+
+    string WarningMessage { get; set; }
+
+    async Task Submit()
+    {
+        var exists = await _userRepository.UserCheck(Model);
+        var isUser = await _userRepository.IsUser(Model);
+        if(exists == true && isUser == true)
+        {
+            _navigation.NavigateTo("/");
+            WarningMessage = "";
+        }
+        else
+        {
+            WarningMessage = "Пользователь не найден";
+        }
+    }
 }

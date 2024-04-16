@@ -3,7 +3,14 @@
 <PageTitle>Мои курсы</PageTitle>
 
 <div style="padding: 60px 120px;">
-
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
+        @foreach(var item in UserCourses)
+        {
+            <div>
+                <h1></h1>
+            </div>
+        }
+    </div>
 </div>
 
 @code {
