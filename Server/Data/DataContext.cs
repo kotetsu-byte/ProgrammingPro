@@ -382,151 +382,487 @@ namespace ProgrammingPro.Server.Data
                     {
                         Id = 1,
                         CourseId = 1,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Класс - это",
+                        Answer1 = "любой тип данных, определяемый пользователем",
+                        Answer2 = "тип данных, определяемый пользователем и сочетающий в себе данные и функции их обработки",
+                        Answer3 = "структура, для которой в программе имеются функции работы с нею",
+                        Answer4 = "нет правильного ответа",
+                        CorrectAnswer = 1,
+                        Points = 20
                     },
                     new Test
                     {
                         Id = 2,
                         CourseId = 1,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Членами класса могут быть",
+                        Answer1 = "только переменные, объявленные как private",
+                        Answer2 = "только функции, объявленные как private",
+                        Answer3 = "только переменные и функции, объявленные как private",
+                        Answer4 = "как переменные, так и функции, могут быть объявлены как private и как public",
+                        CorrectAnswer = 4,
+                        Points = 20
                     },
                     new Test
                     {
                         Id = 3,
                         CourseId = 1,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Что называется конструктором?",
+                        Answer1 = "метод, имя которого совпадает с именем класса и который вызывается автоматически при объявлении класса (до создания объекта класса)",
+                        Answer2 = "метод, имя которого необязательно совпадает с именем класса и который вызывается при создании объекта класса",
+                        Answer3 = "метод, имя которого совпадает с именем класса и который вызывается автоматически при создании объекта класса",
+                        Answer4 = "метод, имя которого совпадает с именем класса и который необходимо явно вызывать из головной программы при объявлении объекта класса",
+                        CorrectAnswer = 3,
+                        Points = 20
                     },
                     new Test
                     {
                         Id = 4,
                         CourseId = 1,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Объект - это",
+                        Answer1 = "переменная, содержащая указатель на класс",
+                        Answer2 = "экземпляр класса",
+                        Answer3 = "класс, который содержит в себе данные и методы их обработки",
+                        Answer4 = "нет правильного ответа",
+                        CorrectAnswer = 2,
+                        Points = 20
                     },
                     new Test
                     {
                         Id = 5,
                         CourseId = 1,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Что называется деструктором",
+                        Answer1 = "метод, который уничтожает объект",
+                        Answer2 = "метод, который удаляет объект",
+                        Answer3 = "метод, который освобождает память, занимаемую объектом",
+                        Answer4 = "системная функция, которая освобождает память, занимаемую объектом",
+                        CorrectAnswer = 3,
+                        Points = 20
                     },
                     new Test
                     {
                         Id = 6,
                         CourseId = 1,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
+                        Question = "Что называется наследованием?",
+                        Answer1 = "это механизм, посредством которого производный класс получает элементы родительского и может дополнять либо изменять их свойства и методы",
+                        Answer2 = "это механизм переопределения методов базового класса",
+                        Answer3 = "это механизм, посредством которого производный класс получает все поля базового класса",
+                        Answer4 = "это механизм, посредством которого производный класс получает элементы родительского, может их дополнить, но не может переопределить",
+                        CorrectAnswer = 1,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 7,
+                        CourseId = 1,
+                        Question = "Выберите правильное объявление производного класса",
+                        Answer1 = "class MoreDetails:: Details;",
+                        Answer2 = "class MoreDetails: public class Details;",
+                        Answer3 = "class MoreDetails: public Details;",
+                        Answer4 = "class MoreDetails: class(Details);",
+                        CorrectAnswer = 3,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 8,
+                        CourseId = 1,
+                        Question = "Возможность и способ обращения производного класса к элементам базового определяется",
+                        Answer1 = "ключами доступа: private, public, protected в теле производного класса",
+                        Answer2 = "только ключом доступа protected в заголовке объявления производного класса",
+                        Answer3 = "ключами доступа: private, public, protected в заголовке объявления производного класса",
+                        Answer4 = "ключами доступа: private, public, protected в теле базового класса",
+                        CorrectAnswer = 3,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 9,
+                        CourseId = 1,
+                        Question = "Дружественная функция - это",
+                        Answer1 = "функция другого класса, среди аргументов которой есть элементы данного класса",
+                        Answer2 = "функция, объявленная в классе с атрибутом friend, но не являющаяся членом класса;",
+                        Answer3 = "функция, являющаяся членом класса и объявленная с атрибутом friend;",
+                        Answer4 = "функция, которая в другом классе объявлена как дружественная данному",
+                        CorrectAnswer = 2,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 10,
+                        CourseId = 1,
+                        Question = "Шаблон функции - это...",
+                        Answer1 = "определение функции, в которой типу обрабатываемых данных присвоено условное обозначение",
+                        Answer2 = "прототип функции, в котором вместо имен параметров указан условный тип",
+                        Answer3 = "определение функции, в котором указаны возможные варианты типов обрабатываемых параметров",
+                        Answer4 = "определение функции, в котором в прототипе указан условный тип, а в определении указаны варианты типов обрабатываемых параметров",
+                        CorrectAnswer = 1,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 11,
+                        CourseId = 1,
+                        Question = "Переопределение операций имеет вид:",
+                        Answer1 = "имя_класса, ключевое слово operation, символ операции",
+                        Answer2 = "имя_класса, ключевое слово operator, символ операции, в круглых скобках могут быть указаны аргументы",
+                        Answer3 = "имя_класса, ключевое слово operator, список аргументов",
+                        Answer4 = "имя_класса, два двоеточия, ключевое слово operator, символ операции",
+                        CorrectAnswer = 2,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 12,
+                        CourseId = 1,
+                        Question = "Для доступа к элементам объекта используются:",
+                        Answer1 = "при обращении через имя объекта – точка, при обращении через указатель – операция «->»",
+                        Answer2 = "при обращении через имя объекта – два двоеточия, при обращении через указатель – операция «точка»",
+                        Answer3 = "при обращении через имя объекта – точка, при обращении через указатель – два двоеточия",
+                        Answer4 = "при обращении через имя объекта – два двоеточия, при обращении через указатель – операция «->»",
+                        CorrectAnswer = 1,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 13,
+                        CourseId = 1,
+                        Question = "Полиморфизм – это :",
+                        Answer1 = "средство, позволяющее в одном классе использовать методы с одинаковыми именами;",
+                        Answer2 = "средство, позволяющее в одном классе использовать методы с разными именами для выполнения одинаковых действий\r\n\r\n",
+                        Answer3 = "средство, позволяющее перегружать функции для работы с разными типами или разным количеством аргументов",
+                        Answer4 = "средство, позволяющее использовать одно имя для обозначения действий, общих для родственных классов",
+                        CorrectAnswer = 4,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 14,
+                        CourseId = 1,
+                        Question = "Полиморфизм реализован через механизмы:",
+                        Answer1 = "перегрузки функций, наследования методов, шаблонов;",
+                        Answer2 = "наследования методов, виртуальных функций, шаблонов",
+                        Answer3 = "перегрузки функций, виртуальных функций, шаблонов",
+                        Answer4 = "перегрузки функций, наследования, виртуальных функций.",
+                        CorrectAnswer = 3,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 15,
+                        CourseId = 1,
+                        Question = "Виртуальными называются функции:",
+                        Answer1 = "функции базового класса, которые могут быть переопределены в производном классе",
+                        Answer2 = "функции базового класса, которые не используются в производном классе;",
+                        Answer3 = "функции базового класса, которые не могут быть переопределены в базовом классе;",
+                        Answer4 = "функции производного класса, переопределенные относительно базового класса",
+                        CorrectAnswer = 1,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 16,
+                        CourseId = 1,
+                        Question = "Полиморфизм в объектно-ориентированном программировании реализуется:",
+                        Answer1 = "через механизмы перегрузки (функций и операций) и шаблоны;",
+                        Answer2 = "через механизмы перегрузки (функций и операций), виртуальные функции и шаблоны",
+                        Answer3 = "через виртуальные функции и шаблоны;",
+                        Answer4 = "через механизмы перегрузки (функций и операций) и виртуальные функции",
+                        CorrectAnswer = 2,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 17,
+                        CourseId = 1,
+                        Question = "Для чего предназначен оператор namespace:",
+                        Answer1 = "для использования классов, переменных и функций из других модулей программы без использования заголовочных файлов",
+                        Answer2 = "для заключения в группу объявлений классов, переменных и функций в отдельный контекст со своим именем",
+                        Answer3 = "для заключения в группу объявлений классов, переменных и функций для использования только в текущем модуле",
+                        Answer4 = "нет правильного ответа",
+                        CorrectAnswer = 2,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 18,
+                        CourseId = 1,
+                        Question = "Какой из компонентов может входить в интегрированную среду программирования:",
+                        Answer1 = "наладчик",
+                        Answer2 = "доводчик",
+                        Answer3 = "отладчик",
+                        Answer4 = "все вышеперечисленные",
+                        CorrectAnswer = 3,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 19,
+                        CourseId = 1,
+                        Question = "Какой из наборов перечисляемых значений записан правильно:",
+                        Answer1 = "enum { a, b = 3, c = 4, 3 };",
+                        Answer2 = "enum { a, b, 3, 4 };",
+                        Answer3 = "enum {a, b = 3, c, d }; +",
+                        Answer4 = "все вышеперечисленные",
+                        CorrectAnswer = 3,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 20,
+                        CourseId = 1,
+                        Question = "В чем различие использования следующих выражений #include <…> и #include «…»:",
+                        Answer1 = "различие заключается в методе поиска препроцессором включаемого файла",
+                        Answer2 = "в различии использования заголовочных и исходных файлов",
+                        Answer3 = "нет различий",
+                        Answer4 = "оба варианты верны",
                         CorrectAnswer = 0,
                         Points = 0
                     },
                     // C#
                     new Test
                     {
-                        Id = 7,
+                        Id = 21,
                         CourseId = 2,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Что такое Куча:",
+                        Answer1 = "Область динамической памяти",
+                        Answer2 = "Именованная область памяти",
+                        Answer3 = "Куча переменных",
+                        Answer4 = "Нет правильного ответа",
+                        CorrectAnswer = 1,
+                        Points = 20
                     },
                     new Test
                     {
-                        Id = 8,
+                        Id = 22,
                         CourseId = 2,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какие циклы существуют в языке C#:",
+                        Answer1 = "for, while",
+                        Answer2 = "for, while, do while, foreach",
+                        Answer3 = "for, while, do while",
+                        Answer4 = "Нет правильного ответа",
+                        CorrectAnswer = 2,
+                        Points = 20
                     },
                     new Test
                     {
-                        Id = 9,
+                        Id = 23,
                         CourseId = 2,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Что обозначает ключевое слово var:",
+                        Answer1 = "Устраивает «войну» между программами",
+                        Answer2 = "Обозначает что переменная имеет явный тип данных",
+                        Answer3 = "Обозначает что переменная без явного типа данных",
+                        Answer4 = "Нет правильного ответа",
+                        CorrectAnswer = 3,
+                        Points = 20
                     },
                     new Test
                     {
-                        Id = 10,
+                        Id = 24,
                         CourseId = 2,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какие типы переменных существуют:",
+                        Answer1 = "int, char, bool, float, double",
+                        Answer2 = "int, char, bool, string",
+                        Answer3 = "Оба варианта верны",
+                        Answer4 = "Нет верного ответа",
+                        CorrectAnswer = 3,
+                        Points = 20
                     },
                     new Test
                     {
-                        Id = 11,
+                        Id = 25,
                         CourseId = 2,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Что такое константа:",
+                        Answer1 = "Глобальная переменная",
+                        Answer2 = "Переменная которая может быть изменена в любое время",
+                        Answer3 = "Переменная значение которой нельзя изменить",
+                        Answer4 = "Нет верного ответа",
+                        CorrectAnswer = 3,
+                        Points = 20
                     },
                     new Test
                     {
-                        Id = 12,
+                        Id = 26,
                         CourseId = 2,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Где правильно создана переменная:",
+                        Answer1 = "$x = 10;",
+                        Answer2 = "char symbol = ‘A’;",
+                        Answer3 = "x = 0;",
+                        Answer4 = "Нет верного ответа",
+                        CorrectAnswer = 2,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 27,
+                        CourseId = 2,
+                        Question = "Какой оператор возвращает значение из метода:",
+                        Answer1 = "end",
+                        Answer2 = "out",
+                        Answer3 = "return",
+                        Answer4 = "Нет верного ответа",
+                        CorrectAnswer = 3,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 28,
+                        CourseId = 2,
+                        Question = "В чем отличие между break и continue:",
+                        Answer1 = "Continue пропускает итерацию, break выходит из цикла",
+                        Answer2 = "Break используется в Switch case, а continue в циклах",
+                        Answer3 = "Continue работает только в циклах, break дополнительно в методах",
+                        Answer4 = "Нет верного ответа",
+                        CorrectAnswer = 1,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 29,
+                        CourseId = 2,
+                        Question = "Какие бывают циклы:",
+                        Answer1 = "Цикл, Форич, Двойной цикл, Многократный",
+                        Answer2 = "Большие и маленькие",
+                        Answer3 = "for, while, do-while, foreach",
+                        Answer4 = "Нет верного ответа",
+                        CorrectAnswer = 3,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 30,
+                        CourseId = 2,
+                        Question = "Что делает try-catch:",
+                        Answer1 = "Работает с файлами",
+                        Answer2 = "Работает с исключениями",
+                        Answer3 = "Работает с классами",
+                        Answer4 = "Нет верного ответа",
+                        CorrectAnswer = 2,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 31,
+                        CourseId = 2,
+                        Question = "Что такое цикл и для чего они нужны:",
+                        Answer1 = "Циклы нужны для многократного выполнения кода",
+                        Answer2 = "Циклы нужны для многократного запуска программы",
+                        Answer3 = "Циклы нужны для многократного размещения данных",
+                        Answer4 = "Нет верного ответа",
+                        CorrectAnswer = 1,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 32,
+                        CourseId = 2,
+                        Question = "Для чего можно использовать язык C#:",
+                        Answer1 = "Для создания веб сайтов",
+                        Answer2 = "Для создания программ под ПК",
+                        Answer3 = "Оба варианта верны",
+                        Answer4 = "Нет верного ответа",
+                        CorrectAnswer = 3,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 33,
+                        CourseId = 2,
+                        Question = "Какие бывают массивы:",
+                        Answer1 = "Одномерные и многомерные",
+                        Answer2 = "Резиновые и статичные",
+                        Answer3 = "Сложные и простые",
+                        Answer4 = "Нет верного ответа",
+                        CorrectAnswer = 1,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 34,
+                        CourseId = 2,
+                        Question = "Какой тип переменной используется в коде: int a = 5:",
+                        Answer1 = "Знаковое 64-бит целое",
+                        Answer2 = "Знаковое 8-бит целое",
+                        Answer3 = "Знаковое 32-бит целое",
+                        Answer4 = "Нет верного ответа",
+                        CorrectAnswer = 3,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 35,
+                        CourseId = 2,
+                        Question = "Что такое массив:",
+                        Answer1 = "Набор однотипных данных, которые располагаются в памяти последовательно друг за другом",
+                        Answer2 = "Набор данных типа int (32-бит целое)",
+                        Answer3 = "Набор текстовых значений в формате Unicode, которые расположены в случайном порядке",
+                        Answer4 = "Нет верного ответа",
+                        CorrectAnswer = 1,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 36,
+                        CourseId = 2,
+                        Question = "Что делает оператор «%»:",
+                        Answer1 = "Возвращает процент от суммы",
+                        Answer2 = "Возвращает остаток от деления",
+                        Answer3 = "Возвращает тригонометрическую функцию",
+                        Answer4 = "Нет верного ответа",
+                        CorrectAnswer = 2,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 37,
+                        CourseId = 2,
+                        Question = "Как называется оператор «?:»:",
+                        Answer1 = "Прямой оператор",
+                        Answer2 = "Вопросительный",
+                        Answer3 = "Тернарный оператор",
+                        Answer4 = "Нет верного ответа",
+                        CorrectAnswer = 3,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 38,
+                        CourseId = 2,
+                        Question = "Что сделает программа выполнив следующий код: Console.WriteLine(«Hello, World!»);",
+                        Answer1 = "Напишет Hello, World!",
+                        Answer2 = "Напишет на новой строчке Hello, World!",
+                        Answer3 = "Удалит все значения с Hello, World!",
+                        Answer4 = "Нет верного ответа",
+                        CorrectAnswer = 2,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 39,
+                        CourseId = 2,
+                        Question = "Для чего нужны условные операторы:",
+                        Answer1 = "Чтобы устанавливать условия пользователю",
+                        Answer2 = "Для оптимизации программы",
+                        Answer3 = "Для ветвления программы",
+                        Answer4 = "Нет верного ответа",
+                        CorrectAnswer = 3,
+                        Points = 20
+                    },
+                    new Test
+                    {
+                        Id = 40,
+                        CourseId = 2,
+                        Question = "Как сделать инкрементацию числа:",
+                        Answer1 = "!=",
+                        Answer2 = "++",
+                        Answer3 = "—-",
+                        Answer4 = "Нет верного ответа",
+                        CorrectAnswer = 2,
+                        Points = 20
                     },
                     // Java
                     new Test
                     {
-                        Id = 13,
+                        Id = 41,
                         CourseId = 3,
                         Question = "",
                         Answer1 = "",
@@ -538,7 +874,7 @@ namespace ProgrammingPro.Server.Data
                     },
                     new Test
                     {
-                        Id = 14,
+                        Id = 42,
                         CourseId = 3,
                         Question = "",
                         Answer1 = "",
@@ -550,7 +886,7 @@ namespace ProgrammingPro.Server.Data
                     },
                     new Test
                     {
-                        Id = 15,
+                        Id = 43,
                         CourseId = 3,
                         Question = "",
                         Answer1 = "",
@@ -562,7 +898,7 @@ namespace ProgrammingPro.Server.Data
                     },
                     new Test
                     {
-                        Id = 16,
+                        Id = 44,
                         CourseId = 3,
                         Question = "",
                         Answer1 = "",
@@ -574,7 +910,7 @@ namespace ProgrammingPro.Server.Data
                     },
                     new Test
                     {
-                        Id = 17,
+                        Id = 45,
                         CourseId = 3,
                         Question = "",
                         Answer1 = "",
@@ -586,7 +922,175 @@ namespace ProgrammingPro.Server.Data
                     },
                     new Test
                     {
-                        Id = 18,
+                        Id = 46,
+                        CourseId = 3,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 47,
+                        CourseId = 3,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 48,
+                        CourseId = 3,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 49,
+                        CourseId = 3,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 50,
+                        CourseId = 3,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 51,
+                        CourseId = 3,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 52,
+                        CourseId = 3,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 53,
+                        CourseId = 3,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 54,
+                        CourseId = 3,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 55,
+                        CourseId = 3,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 56,
+                        CourseId = 3,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 57,
+                        CourseId = 3,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 58,
+                        CourseId = 3,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 59,
+                        CourseId = 3,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 60,
                         CourseId = 3,
                         Question = "",
                         Answer1 = "",
@@ -599,7 +1103,7 @@ namespace ProgrammingPro.Server.Data
                     // Python
                     new Test
                     {
-                        Id = 19,
+                        Id = 61,
                         CourseId = 4,
                         Question = "",
                         Answer1 = "",
@@ -611,7 +1115,7 @@ namespace ProgrammingPro.Server.Data
                     },
                     new Test
                     {
-                        Id = 20,
+                        Id = 62,
                         CourseId = 4,
                         Question = "",
                         Answer1 = "",
@@ -623,7 +1127,7 @@ namespace ProgrammingPro.Server.Data
                     },
                     new Test
                     {
-                        Id = 21,
+                        Id = 63,
                         CourseId = 4,
                         Question = "",
                         Answer1 = "",
@@ -635,7 +1139,7 @@ namespace ProgrammingPro.Server.Data
                     },
                     new Test
                     {
-                        Id = 22,
+                        Id = 64,
                         CourseId = 4,
                         Question = "",
                         Answer1 = "",
@@ -647,7 +1151,7 @@ namespace ProgrammingPro.Server.Data
                     },
                     new Test
                     {
-                        Id = 23,
+                        Id = 65,
                         CourseId = 4,
                         Question = "",
                         Answer1 = "",
@@ -659,7 +1163,175 @@ namespace ProgrammingPro.Server.Data
                     },
                     new Test
                     {
-                        Id = 24,
+                        Id = 66,
+                        CourseId = 4,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 67,
+                        CourseId = 4,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 68,
+                        CourseId = 4,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 69,
+                        CourseId = 4,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 70,
+                        CourseId = 4,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 71,
+                        CourseId = 4,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 72,
+                        CourseId = 4,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 73,
+                        CourseId = 4,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 74,
+                        CourseId = 4,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 75,
+                        CourseId = 4,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 76,
+                        CourseId = 4,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 77,
+                        CourseId = 4,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 78,
+                        CourseId = 4,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 79,
+                        CourseId = 4,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 80,
                         CourseId = 4,
                         Question = "",
                         Answer1 = "",
@@ -672,7 +1344,7 @@ namespace ProgrammingPro.Server.Data
                     // Ruby
                     new Test
                     {
-                        Id = 25,
+                        Id = 81,
                         CourseId = 5,
                         Question = "",
                         Answer1 = "",
@@ -684,7 +1356,7 @@ namespace ProgrammingPro.Server.Data
                     },
                     new Test
                     {
-                        Id = 26,
+                        Id = 82,
                         CourseId = 5,
                         Question = "",
                         Answer1 = "",
@@ -696,7 +1368,7 @@ namespace ProgrammingPro.Server.Data
                     },
                     new Test
                     {
-                        Id = 27,
+                        Id = 83,
                         CourseId = 5,
                         Question = "",
                         Answer1 = "",
@@ -708,7 +1380,7 @@ namespace ProgrammingPro.Server.Data
                     },
                     new Test
                     {
-                        Id = 28,
+                        Id = 84,
                         CourseId = 5,
                         Question = "",
                         Answer1 = "",
@@ -720,7 +1392,7 @@ namespace ProgrammingPro.Server.Data
                     },
                     new Test
                     {
-                        Id = 29,
+                        Id = 85,
                         CourseId = 5,
                         Question = "",
                         Answer1 = "",
@@ -732,7 +1404,175 @@ namespace ProgrammingPro.Server.Data
                     },
                     new Test
                     {
-                        Id = 30,
+                        Id = 86,
+                        CourseId = 5,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 87,
+                        CourseId = 5,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 88,
+                        CourseId = 5,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 89,
+                        CourseId = 5,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 90,
+                        CourseId = 5,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 91,
+                        CourseId = 5,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 92,
+                        CourseId = 5,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 93,
+                        CourseId = 5,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 94,
+                        CourseId = 5,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 95,
+                        CourseId = 5,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 96,
+                        CourseId = 5,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 97,
+                        CourseId = 5,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 98,
+                        CourseId = 5,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 99,
+                        CourseId = 5,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 100,
                         CourseId = 5,
                         Question = "",
                         Answer1 = "",
@@ -745,7 +1585,7 @@ namespace ProgrammingPro.Server.Data
                     // PHP
                     new Test
                     {
-                        Id = 31,
+                        Id = 101,
                         CourseId = 6,
                         Question = "",
                         Answer1 = "",
@@ -757,7 +1597,7 @@ namespace ProgrammingPro.Server.Data
                     },
                     new Test
                     {
-                        Id = 32,
+                        Id = 102,
                         CourseId = 6,
                         Question = "",
                         Answer1 = "",
@@ -769,7 +1609,7 @@ namespace ProgrammingPro.Server.Data
                     },
                     new Test
                     {
-                        Id = 33,
+                        Id = 103,
                         CourseId = 6,
                         Question = "",
                         Answer1 = "",
@@ -781,7 +1621,7 @@ namespace ProgrammingPro.Server.Data
                     },
                     new Test
                     {
-                        Id = 34,
+                        Id = 104,
                         CourseId = 6,
                         Question = "",
                         Answer1 = "",
@@ -793,7 +1633,7 @@ namespace ProgrammingPro.Server.Data
                     },
                     new Test
                     {
-                        Id = 35,
+                        Id = 105,
                         CourseId = 6,
                         Question = "",
                         Answer1 = "",
@@ -805,7 +1645,175 @@ namespace ProgrammingPro.Server.Data
                     },
                     new Test
                     {
-                        Id = 36,
+                        Id = 106,
+                        CourseId = 6,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 107,
+                        CourseId = 6,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 108,
+                        CourseId = 6,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 109,
+                        CourseId = 6,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 110,
+                        CourseId = 6,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 111,
+                        CourseId = 6,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 112,
+                        CourseId = 6,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 113,
+                        CourseId = 6,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 114,
+                        CourseId = 6,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 115,
+                        CourseId = 6,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 116,
+                        CourseId = 6,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 117,
+                        CourseId = 6,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 118,
+                        CourseId = 6,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 119,
+                        CourseId = 6,
+                        Question = "",
+                        Answer1 = "",
+                        Answer2 = "",
+                        Answer3 = "",
+                        Answer4 = "",
+                        CorrectAnswer = 0,
+                        Points = 0
+                    },
+                    new Test
+                    {
+                        Id = 120,
                         CourseId = 6,
                         Question = "",
                         Answer1 = "",

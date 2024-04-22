@@ -1,21 +1,27 @@
-﻿@page "/tests/{CourseId:int}"
+﻿@page "/test/{CourseId:int}"
+@inject IJSRuntime js
+@inject NavigationManager _navigation
 
 <div style="padding: 60px 120px;">
     <div style="background-color: white; border: 5px solid red; border-radius: 10px; padding: 20px;">
         <p>@Model.Question</p>
         <br />
-        <p>@Model.Answer1</p>
-        <p>@Model.Answer2</p>
-        <p>@Model.Answer3</p>
-        <p>@Model.Answer4</p>
+        <p @onclick="() => HandleAnswerChoice(1)">@Model.Answer1</p>
+        <p @onclick="() => HandleAnswerChoice(2)">@Model.Answer2</p>
+        <p @onclick="() => HandleAnswerChoice(3)">@Model.Answer3</p>
+        <p @onclick="() => HandleAnswerChoice(4)">@Model.Answer4</p>
         <br />
         @if(Model != Tests.FirstOrDefault())
         {
-            <button @onclick="() => PrevQuestion(Model.Id)">Предыдущий</button>
+            <button @onclick="() => PrevQuestion()">Предыдущий</button>
         }
         @if(Model != Tests.LastOrDefault())
         {
-            <button @onclick="() => NextQuestion(Model.Id)">Следующий</button>
+            <button @onclick="() => NextQuestion()">Следующий</button>
+        }
+        else
+        {
+            <button @onclick="() => GoToResults()">Перейти к результатам</button>
         }
     </div>
 </div>
@@ -27,25 +33,70 @@
     [Inject]
     ITestRepository _testRepository { get; set; }
 
-    ICollection<TestDto> Tests { get; set; }
-
     TestDto Model { get; set; }
+
+    List<TestDto> Tests;
+
+    int questionNumber = 0;
 
     protected override async Task OnInitializedAsync()
     {
-        Tests = await _testRepository.GetAllTests(CourseId);
+        Tests = PickRandomFiveQuestions(await _testRepository.GetAllTests(CourseId));
         Model = Tests.FirstOrDefault();
+        await js.InvokeVoidAsync("checkAnswers", 1, 0, -1);
+        await js.InvokeVoidAsync("checkAnswers", 2, 0, -1);
+        await js.InvokeVoidAsync("checkAnswers", 3, 0, -1);
+        await js.InvokeVoidAsync("checkAnswers", 4, 0, -1);
+        await js.InvokeVoidAsync("checkAnswers", 5, 0, -1);
     }
 
-    void PrevQuestion(int? id)
+    void PrevQuestion()
     {
         var Models = Tests.ToArray();
-        Model = Models[(int)id - 1];
+        questionNumber--;
+        Model = Models[questionNumber];
     }
 
-    void NextQuestion(int? id)
+    void NextQuestion()
     {
         var Models = Tests.ToArray();
-        Model = Models[(int)id + 1];
+        questionNumber++;
+        Model = Models[questionNumber];
+    }
+
+    List<TestDto> PickRandomFiveQuestions(ICollection<TestDto> arg)
+    {
+        var tests = arg.ToList();
+        var testsToDisplay = new List<TestDto>();
+        var random = new Random();
+        foreach(var i in tests)
+        {
+            var randomTest = tests[random.Next(0, tests.ToArray().Length)];
+            if(!testsToDisplay.Contains(randomTest))
+            {
+                testsToDisplay.Add(randomTest);
+            }
+            else
+            {
+                continue;
+            }
+            if(testsToDisplay.ToArray().Length >= 5)
+            {
+                break;
+            }
+        }
+
+        return testsToDisplay;
+    }
+
+    async void HandleAnswerChoice(int num)
+    {
+        var correctAnswer = Model.CorrectAnswer;
+        await js.InvokeVoidAsync("checkAnswers", questionNumber + 1, num, (int)correctAnswer);
+    }
+
+    void GoToResults()
+    {
+        _navigation.NavigateTo($"/test/result/{CourseId}");
     }
 }

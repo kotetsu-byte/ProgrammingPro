@@ -58,6 +58,7 @@
 
   <ItemGroup>
     <None Include="Pages\Admin\Index.razor" />
+    <None Include="wwwroot\js\app.js" />
   </ItemGroup>
 
 </Project>

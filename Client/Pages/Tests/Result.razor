@@ -1,0 +1,82 @@
+﻿@page "/test/result/{CourseId:int}"
+@inject IJSRuntime js
+@inject NavigationManager _navigation
+
+<div style="padding: 60px 120px">
+    <div style="background-color: white; border-radius: 20px; border: 5px red solid; padding: 20px;">
+        <h3>Результаты</h3>
+        <p>@correctAnswerCount правильных ответов из @answerCount</p>
+        <button @onclick="() => GoToCourse()">Вернуться к курсу</button>
+    </div>
+</div>
+
+@code {
+    [Inject]
+    public int CourseId { get; set; }
+
+    [Inject]
+    ITestRepository _testRepository { get; set; }
+
+    ICollection<TestDto> Tests { get; set; }
+
+    int answerCount;
+    int correctAnswerCount;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var answer1 = await js.InvokeAsync<string>("getAnswer1");
+        var answer2 = await js.InvokeAsync<string>("getAnswer2");
+        var answer3 = await js.InvokeAsync<string>("getAnswer3");
+        var answer4 = await js.InvokeAsync<string>("getAnswer4");
+        var answer5 = await js.InvokeAsync<string>("getAnswer5");
+
+        answerCount = 0;
+        if(answer1 != "empty")
+        {
+            answerCount++;
+        }
+        if(answer2 != "empty")
+        {
+            answerCount++;
+        }
+        if(answer3 != "empty")
+        {
+            answerCount++;
+        }
+        if(answer4 != "empty")
+        {
+            answerCount++;
+        }
+        if(answer5 != "empty")
+        {
+            answerCount++;
+        }
+
+        correctAnswerCount = 0;
+        if(answer1 == "correct")
+        {
+            correctAnswerCount++;
+        }
+        if(answer2 == "correct")
+        {
+            correctAnswerCount++;
+        }
+        if(answer3 == "correct")
+        {
+            correctAnswerCount++;
+        }
+        if(answer4 == "correct")
+        {
+            correctAnswerCount++;
+        }
+        if(answer5 == "correct")
+        {
+            correctAnswerCount++;
+        }
+    }
+
+    void GoToCourse()
+    {
+        _navigation.NavigateTo($"/course/{CourseId}");
+    }
+}
