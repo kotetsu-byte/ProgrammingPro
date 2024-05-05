@@ -14,13 +14,6 @@ namespace ProgrammingPro.Server.Data
         public DbSet<Course> Courses { get; set; }
         public DbSet<Lesson> Lessons { get; set; }
         public DbSet<Test> Tests { get; set; }
-        public DbSet<Doc> Docs { get; set; }
-        public DbSet<Video> Videos { get; set; }
-        public DbSet<Homework> Homeworks { get; set; }
-        public DbSet<Material> Materials { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<UserCourse> UserCourses { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -34,37 +27,6 @@ namespace ProgrammingPro.Server.Data
                 .HasOne(c => c.Course)
                 .WithMany(t => t.Tests)
                 .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Doc>()
-                .HasOne(l => l.Lesson)
-                .WithMany(d => d.Docs)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Video>()
-                .HasOne(l => l.Lesson)
-                .WithMany(v => v.Videos)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Homework>()
-                .HasOne(l => l.Lesson)
-                .WithMany(h => h.Homeworks)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Material>()
-                .HasOne(h => h.Homework)
-                .WithOne(m => m.Materials)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<UserCourse>()
-                .HasKey(uc => new { uc.UserId, uc.CourseId });
-            modelBuilder.Entity<UserCourse>()
-                .HasOne(c => c.Course)
-                .WithMany(uc => uc.UserCourses)
-                .HasForeignKey(u => u.UserId);
-            modelBuilder.Entity<UserCourse>()
-                .HasOne(u => u.User)
-                .WithMany(uc => uc.UserCourses)
-                .HasForeignKey(c => c.CourseId);
 
 
             modelBuilder.Entity<Course>()
@@ -387,8 +349,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "тип данных, определяемый пользователем и сочетающий в себе данные и функции их обработки",
                         Answer3 = "структура, для которой в программе имеются функции работы с нею",
                         Answer4 = "нет правильного ответа",
-                        CorrectAnswer = 1,
-                        Points = 20
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
@@ -399,8 +360,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "только функции, объявленные как private",
                         Answer3 = "только переменные и функции, объявленные как private",
                         Answer4 = "как переменные, так и функции, могут быть объявлены как private и как public",
-                        CorrectAnswer = 4,
-                        Points = 20
+                        CorrectAnswer = 4
                     },
                     new Test
                     {
@@ -411,8 +371,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "метод, имя которого необязательно совпадает с именем класса и который вызывается при создании объекта класса",
                         Answer3 = "метод, имя которого совпадает с именем класса и который вызывается автоматически при создании объекта класса",
                         Answer4 = "метод, имя которого совпадает с именем класса и который необходимо явно вызывать из головной программы при объявлении объекта класса",
-                        CorrectAnswer = 3,
-                        Points = 20
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
@@ -423,8 +382,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "экземпляр класса",
                         Answer3 = "класс, который содержит в себе данные и методы их обработки",
                         Answer4 = "нет правильного ответа",
-                        CorrectAnswer = 2,
-                        Points = 20
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
@@ -435,8 +393,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "метод, который удаляет объект",
                         Answer3 = "метод, который освобождает память, занимаемую объектом",
                         Answer4 = "системная функция, которая освобождает память, занимаемую объектом",
-                        CorrectAnswer = 3,
-                        Points = 20
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
@@ -447,8 +404,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "это механизм переопределения методов базового класса",
                         Answer3 = "это механизм, посредством которого производный класс получает все поля базового класса",
                         Answer4 = "это механизм, посредством которого производный класс получает элементы родительского, может их дополнить, но не может переопределить",
-                        CorrectAnswer = 1,
-                        Points = 20
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
@@ -459,8 +415,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "class MoreDetails: public class Details;",
                         Answer3 = "class MoreDetails: public Details;",
                         Answer4 = "class MoreDetails: class(Details);",
-                        CorrectAnswer = 3,
-                        Points = 20
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
@@ -471,8 +426,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "только ключом доступа protected в заголовке объявления производного класса",
                         Answer3 = "ключами доступа: private, public, protected в заголовке объявления производного класса",
                         Answer4 = "ключами доступа: private, public, protected в теле базового класса",
-                        CorrectAnswer = 3,
-                        Points = 20
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
@@ -483,8 +437,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "функция, объявленная в классе с атрибутом friend, но не являющаяся членом класса;",
                         Answer3 = "функция, являющаяся членом класса и объявленная с атрибутом friend;",
                         Answer4 = "функция, которая в другом классе объявлена как дружественная данному",
-                        CorrectAnswer = 2,
-                        Points = 20
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
@@ -495,8 +448,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "прототип функции, в котором вместо имен параметров указан условный тип",
                         Answer3 = "определение функции, в котором указаны возможные варианты типов обрабатываемых параметров",
                         Answer4 = "определение функции, в котором в прототипе указан условный тип, а в определении указаны варианты типов обрабатываемых параметров",
-                        CorrectAnswer = 1,
-                        Points = 20
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
@@ -507,8 +459,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "имя_класса, ключевое слово operator, символ операции, в круглых скобках могут быть указаны аргументы",
                         Answer3 = "имя_класса, ключевое слово operator, список аргументов",
                         Answer4 = "имя_класса, два двоеточия, ключевое слово operator, символ операции",
-                        CorrectAnswer = 2,
-                        Points = 20
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
@@ -519,8 +470,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "при обращении через имя объекта – два двоеточия, при обращении через указатель – операция «точка»",
                         Answer3 = "при обращении через имя объекта – точка, при обращении через указатель – два двоеточия",
                         Answer4 = "при обращении через имя объекта – два двоеточия, при обращении через указатель – операция «->»",
-                        CorrectAnswer = 1,
-                        Points = 20
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
@@ -531,8 +481,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "средство, позволяющее в одном классе использовать методы с разными именами для выполнения одинаковых действий\r\n\r\n",
                         Answer3 = "средство, позволяющее перегружать функции для работы с разными типами или разным количеством аргументов",
                         Answer4 = "средство, позволяющее использовать одно имя для обозначения действий, общих для родственных классов",
-                        CorrectAnswer = 4,
-                        Points = 20
+                        CorrectAnswer = 4
                     },
                     new Test
                     {
@@ -543,8 +492,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "наследования методов, виртуальных функций, шаблонов",
                         Answer3 = "перегрузки функций, виртуальных функций, шаблонов",
                         Answer4 = "перегрузки функций, наследования, виртуальных функций.",
-                        CorrectAnswer = 3,
-                        Points = 20
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
@@ -555,8 +503,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "функции базового класса, которые не используются в производном классе;",
                         Answer3 = "функции базового класса, которые не могут быть переопределены в базовом классе;",
                         Answer4 = "функции производного класса, переопределенные относительно базового класса",
-                        CorrectAnswer = 1,
-                        Points = 20
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
@@ -567,8 +514,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "через механизмы перегрузки (функций и операций), виртуальные функции и шаблоны",
                         Answer3 = "через виртуальные функции и шаблоны;",
                         Answer4 = "через механизмы перегрузки (функций и операций) и виртуальные функции",
-                        CorrectAnswer = 2,
-                        Points = 20
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
@@ -579,8 +525,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "для заключения в группу объявлений классов, переменных и функций в отдельный контекст со своим именем",
                         Answer3 = "для заключения в группу объявлений классов, переменных и функций для использования только в текущем модуле",
                         Answer4 = "нет правильного ответа",
-                        CorrectAnswer = 2,
-                        Points = 20
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
@@ -591,8 +536,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "доводчик",
                         Answer3 = "отладчик",
                         Answer4 = "все вышеперечисленные",
-                        CorrectAnswer = 3,
-                        Points = 20
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
@@ -603,8 +547,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "enum { a, b, 3, 4 };",
                         Answer3 = "enum {a, b = 3, c, d }; +",
                         Answer4 = "все вышеперечисленные",
-                        CorrectAnswer = 3,
-                        Points = 20
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
@@ -615,8 +558,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "в различии использования заголовочных и исходных файлов",
                         Answer3 = "нет различий",
                         Answer4 = "оба варианты верны",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        CorrectAnswer = 0
                     },
                     // C#
                     new Test
@@ -628,8 +570,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "Именованная область памяти",
                         Answer3 = "Куча переменных",
                         Answer4 = "Нет правильного ответа",
-                        CorrectAnswer = 1,
-                        Points = 20
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
@@ -640,8 +581,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "for, while, do while, foreach",
                         Answer3 = "for, while, do while",
                         Answer4 = "Нет правильного ответа",
-                        CorrectAnswer = 2,
-                        Points = 20
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
@@ -652,8 +592,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "Обозначает что переменная имеет явный тип данных",
                         Answer3 = "Обозначает что переменная без явного типа данных",
                         Answer4 = "Нет правильного ответа",
-                        CorrectAnswer = 3,
-                        Points = 20
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
@@ -664,8 +603,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "int, char, bool, string",
                         Answer3 = "Оба варианта верны",
                         Answer4 = "Нет верного ответа",
-                        CorrectAnswer = 3,
-                        Points = 20
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
@@ -676,8 +614,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "Переменная которая может быть изменена в любое время",
                         Answer3 = "Переменная значение которой нельзя изменить",
                         Answer4 = "Нет верного ответа",
-                        CorrectAnswer = 3,
-                        Points = 20
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
@@ -688,8 +625,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "char symbol = ‘A’;",
                         Answer3 = "x = 0;",
                         Answer4 = "Нет верного ответа",
-                        CorrectAnswer = 2,
-                        Points = 20
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
@@ -700,8 +636,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "out",
                         Answer3 = "return",
                         Answer4 = "Нет верного ответа",
-                        CorrectAnswer = 3,
-                        Points = 20
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
@@ -712,8 +647,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "Break используется в Switch case, а continue в циклах",
                         Answer3 = "Continue работает только в циклах, break дополнительно в методах",
                         Answer4 = "Нет верного ответа",
-                        CorrectAnswer = 1,
-                        Points = 20
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
@@ -724,8 +658,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "Большие и маленькие",
                         Answer3 = "for, while, do-while, foreach",
                         Answer4 = "Нет верного ответа",
-                        CorrectAnswer = 3,
-                        Points = 20
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
@@ -736,8 +669,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "Работает с исключениями",
                         Answer3 = "Работает с классами",
                         Answer4 = "Нет верного ответа",
-                        CorrectAnswer = 2,
-                        Points = 20
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
@@ -748,8 +680,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "Циклы нужны для многократного запуска программы",
                         Answer3 = "Циклы нужны для многократного размещения данных",
                         Answer4 = "Нет верного ответа",
-                        CorrectAnswer = 1,
-                        Points = 20
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
@@ -760,8 +691,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "Для создания программ под ПК",
                         Answer3 = "Оба варианта верны",
                         Answer4 = "Нет верного ответа",
-                        CorrectAnswer = 3,
-                        Points = 20
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
@@ -772,8 +702,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "Резиновые и статичные",
                         Answer3 = "Сложные и простые",
                         Answer4 = "Нет верного ответа",
-                        CorrectAnswer = 1,
-                        Points = 20
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
@@ -784,8 +713,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "Знаковое 8-бит целое",
                         Answer3 = "Знаковое 32-бит целое",
                         Answer4 = "Нет верного ответа",
-                        CorrectAnswer = 3,
-                        Points = 20
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
@@ -796,8 +724,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "Набор данных типа int (32-бит целое)",
                         Answer3 = "Набор текстовых значений в формате Unicode, которые расположены в случайном порядке",
                         Answer4 = "Нет верного ответа",
-                        CorrectAnswer = 1,
-                        Points = 20
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
@@ -808,8 +735,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "Возвращает остаток от деления",
                         Answer3 = "Возвращает тригонометрическую функцию",
                         Answer4 = "Нет верного ответа",
-                        CorrectAnswer = 2,
-                        Points = 20
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
@@ -820,8 +746,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "Вопросительный",
                         Answer3 = "Тернарный оператор",
                         Answer4 = "Нет верного ответа",
-                        CorrectAnswer = 3,
-                        Points = 20
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
@@ -832,8 +757,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "Напишет на новой строчке Hello, World!",
                         Answer3 = "Удалит все значения с Hello, World!",
                         Answer4 = "Нет верного ответа",
-                        CorrectAnswer = 2,
-                        Points = 20
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
@@ -844,8 +768,7 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "Для оптимизации программы",
                         Answer3 = "Для ветвления программы",
                         Answer4 = "Нет верного ответа",
-                        CorrectAnswer = 3,
-                        Points = 20
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
@@ -856,1833 +779,893 @@ namespace ProgrammingPro.Server.Data
                         Answer2 = "++",
                         Answer3 = "—-",
                         Answer4 = "Нет верного ответа",
-                        CorrectAnswer = 2,
-                        Points = 20
+                        CorrectAnswer = 2
                     },
                     // Java
                     new Test
                     {
                         Id = 41,
                         CourseId = 3,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какой из следующих адресов относится к подсети класса B:",
+                        Answer1 = "224.0.0.10",
+                        Answer2 = "194.80.20.1",
+                        Answer3 = "172.16.0.1",
+                        Answer4 = "Нет верного ответа",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 42,
                         CourseId = 3,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какой из следующих адресов относится к подсети класса B:",
+                        Answer1 = "224.0.0.10",
+                        Answer2 = "140.150.160.1",
+                        Answer3 = "194.80.20.1",
+                        Answer4 = "Нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 43,
                         CourseId = 3,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какое утверждение относительно класса java.lang.Object верно:",
+                        Answer1 = "нельзя явно переопределять методы этого класса",
+                        Answer2 = "у этого класса нет суперкласса",
+                        Answer3 = "нельзя явно наследовать этот класс",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 44,
                         CourseId = 3,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какое утверждение относительно класса java.lang.Object верно:",
+                        Answer1 = "у этого класса нет полей",
+                        Answer2 = "нельзя явно переопределять методы этого класса",
+                        Answer3 = "нельзя явно наследовать этот класс",
+                        Answer4 = "нетверного ответа",
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
                         Id = 45,
                         CourseId = 3,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какое утверждение относительно java.util.Random корректно:",
+                        Answer1 = "void nextBytes(byte[] arr) — заполняет массив arr нулями",
+                        Answer2 = "последовательный запуск приложения, генерирующего последовательность псевдослучайных чисел, никогда не вернет одинаковых последовательностей",
+                        Answer3 = "используется для получения последовательности псевдослучайных чисел",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 46,
                         CourseId = 3,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какое утверждение относительно java.util.Random корректно:",
+                        Answer1 = "double nextGaussian()— возвращает случайное число в диапазоне от 0.0 до 1.0 распределенное по нормальному закону",
+                        Answer2 = "void nextBytes(byte[] arr) — заполняет массив arr нулями",
+                        Answer3 = "последовательный запуск приложения, генерирующего последовательность псевдослучайных чисел, никогда не вернет одинаковых последовательностей",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
                         Id = 47,
                         CourseId = 3,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какой из следующих адресов относится к подсети класса С:",
+                        Answer1 = "219.40.80.33",
+                        Answer2 = "184.80.20.1",
+                        Answer3 = "14.80.22.5",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
                         Id = 48,
                         CourseId = 3,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Одно из ключевых слов языка Java:",
+                        Answer1 = "false",
+                        Answer2 = "null",
+                        Answer3 = "default",
+                        Answer4 = "true",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 49,
                         CourseId = 3,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Одно из ключевых слов языка Java:",
+                        Answer1 = "null",
+                        Answer2 = "protected",
+                        Answer3 = "false",
+                        Answer4 = "true",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 50,
                         CourseId = 3,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какой из следующих адресов относится к подсети класса С:",
+                        Answer1 = "184.80.20.1",
+                        Answer2 = "194.15.40.6",
+                        Answer3 = "14.80.22.5",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 51,
                         CourseId = 3,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Сколько объектов порождается при инициализации массива new int[3][]",
+                        Answer1 = "1",
+                        Answer2 = "3",
+                        Answer3 = "2",
+                        Answer4 = "0",
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
                         Id = 52,
                         CourseId = 3,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какое утверждение относительно класса String верно:",
+                        Answer1 = "является абстрактным",
+                        Answer2 = "содержит только статические методы",
+                        Answer3 = "обладает свойством неизменяемости",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 53,
                         CourseId = 3,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какое значение может принимать переменная булева типа:",
+                        Answer1 = "true",
+                        Answer2 = "0",
+                        Answer3 = "1",
+                        Answer4 = "-1",
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
                         Id = 54,
                         CourseId = 3,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какое значение может принимать переменная булева типа:",
+                        Answer1 = "null",
+                        Answer2 = "false",
+                        Answer3 = "1",
+                        Answer4 = "0",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 55,
                         CourseId = 3,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Отметьте верное утверждение относительно языков Java и JavaScript:",
+                        Answer1 = "JavaScript является синонимом Java",
+                        Answer2 = "их спецификации являются закрытыми",
+                        Answer3 = "оба языка кроссплатформенны",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 56,
                         CourseId = 3,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Вы создали класс Animal в пакете ru.animal. Где будет хранится исходный код класса в файловой системе:",
+                        Answer1 = "ru\\animal\\Animal.class",
+                        Answer2 = "ru\\Animal.java",
+                        Answer3 = "ru\\animal\\Animal.java",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 57,
                         CourseId = 3,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Если вызвать write(0x02468101) у экземпляра OutputStream, то в каком порядке и какие байты будут записаны в выходной поток:",
+                        Answer1 = "0x01,0x81,0x46,0x02",
+                        Answer2 = "только 0x01",
+                        Answer3 = "0x02,0x46,0x81,0x01",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 58,
                         CourseId = 3,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Может ли массив основываться на абстрактных классах? Интерфейсах:",
+                        Answer1 = "да, нет",
+                        Answer2 = "да, да",
+                        Answer3 = "нет, да",
+                        Answer4 = "нет, нет",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 59,
                         CourseId = 3,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Что такое приоритет потока:",
+                        Answer1 = "качественная характеристика, обеспечивающая распределение процессорного времени между потоками: чем выше приоритет, тем в среднем чаще будет выделяться процессорное время для такого потока",
+                        Answer2 = "процессор сначала выполняет все задачи с более высоким приоритетом, затем – с менее высоким",
+                        Answer3 = "порядковый номер потока в очереди на исполнение",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
                         Id = 60,
                         CourseId = 3,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какое преимущество предоставляет интерфейс Runnable по сравнению с классом Thread:",
+                        Answer1 = "позволяет более гибко работать с приоритетами потоков",
+                        Answer2 = "позволяет классу, содержащему логику работы, наследоваться от других классов",
+                        Answer3 = "позволяет обойтись без класса Thread",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     // Python
                     new Test
                     {
                         Id = 61,
                         CourseId = 4,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Что делает метод normalize() DOM-объекта:",
+                        Answer1 = "готовит XML для красивого вывода",
+                        Answer2 = "сводит воедино все идущие подряд текстовые узлы",
+                        Answer3 = "исправляет XML, добавляя пропущенные теги",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 62,
                         CourseId = 4,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Дан массив >>> c = array([[1,2], [2,3], [4,5]]). Чему равен срез c[:,1]:",
+                        Answer1 = "array([1, 2, 4])",
+                        Answer2 = "array([2, 3])",
+                        Answer3 = "array([2, 3, 5])",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 63,
                         CourseId = 4,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Чему будет равен результат выполнения: urlparse.urlsplit(\"http://google.com/search?q=Python#1\"):",
+                        Answer1 = "(‘http’, ‘google.com’, ‘/search’, », ‘q=Python’, ‘1’)",
+                        Answer2 = "(‘http://’, ‘google.com/’, ‘search?’, ‘q=Python#’, ‘1’)",
+                        Answer3 = "(‘http’, ‘google.com’, ‘/search’, ‘q=Python’, ‘1’)",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 64,
                         CourseId = 4,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Для чего применяется метод nextset() объекта-курсора:",
+                        Answer1 = "для перехода к следующему набору записей результата запроса",
+                        Answer2 = "для перехода к следующей записи результата запроса",
+                        Answer3 = "для получения следующего набора записей результата запроса",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
                         Id = 65,
                         CourseId = 4,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "В каком модуле нужно искать функции, помогающие тестировать программу:",
+                        Answer1 = "dictutils",
+                        Answer2 = "profile",
+                        Answer3 = "unittest",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 66,
                         CourseId = 4,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Каким образом в модуле poplib представлен сеанс работы с POP3-сервером:",
+                        Answer1 = "набор функций",
+                        Answer2 = "экземпляр класса РОРЗ",
+                        Answer3 = "список кортежей",
+                        Answer4 = "нетверного ответа",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 67,
                         CourseId = 4,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какой из перечисленных обработчиков mod_python выполняется раньше других:",
+                        Answer1 = "PythonPostReadRequestHandle",
+                        Answer2 = "PythonHandler",
+                        Answer3 = "PythonFixupHandler",
+                        Answer4 = "Все выполняются одновременно",
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
                         Id = 68,
                         CourseId = 4,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Что будет получено в результате вычисления следующего выражения: (0 < 5 <= 3) and (0 / 0):",
+                        Answer1 = "True (или 1)",
+                        Answer2 = "False (или 0)",
+                        Answer3 = "синтаксическая ошибка",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 69,
                         CourseId = 4,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какое из приведенных ниже регулярных выражений некорректно:",
+                        Answer1 = "a+b++",
+                        Answer2 = "(?P(ac))",
+                        Answer3 = "(a+b+)+",
+                        Answer4 = "(a+b+с+)+",
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
                         Id = 70,
                         CourseId = 4,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Зачем в XML пространства имен:",
+                        Answer1 = "пространства имен позволяют указывать опции для приложения, обрабатывающего XML",
+                        Answer2 = "пространства имен позволяют включать однотипные XML-документы друг в друга",
+                        Answer3 = "для сочетания в одном документе XML с различными DTD",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 71,
                         CourseId = 4,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Что такое регулярное выражение:",
+                        Answer1 = "шаблон, описывающий множество строк",
+                        Answer2 = "синтаксически правильное выражение на языке Python",
+                        Answer3 = "шаблон для поиска файлов в каталоге",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
                         Id = 72,
                         CourseId = 4,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Для чего нужны функции модуля gettext:",
+                        Answer1 = "для получения текста от пользователя",
+                        Answer2 = "для обеспечения интернационализации программы",
+                        Answer3 = "для чтения строки со стандартного ввода",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 73,
                         CourseId = 4,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какое значение threadsafety соответствует ситуации, когда потоки могут одновременно использовать как DB-API 2.0 совместимый модуль, так и соединения, получаемые на основе этого модуля:",
+                        Answer1 = "1",
+                        Answer2 = "0",
+                        Answer3 = "2",
+                        Answer4 = "3",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 74,
                         CourseId = 4,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Экземпляры какого класса сочетают замок и средство коммуникации между потоками:",
+                        Answer1 = "Event",
+                        Answer2 = "Lock",
+                        Answer3 = "Condition",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 75,
                         CourseId = 4,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Как средствами самого Python определить имена формальных аргументов функции func(), если известно, что функция написана на Python:",
+                        Answer1 = "func.func_globals",
+                        Answer2 = "inspect.getargspec(func)",
+                        Answer3 = "func.func_locals",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 76,
                         CourseId = 4,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какой метод позволяет узнать, имеет ли данное сообщение несколько частей:",
+                        Answer1 = "items()",
+                        Answer2 = "get_main_type()",
+                        Answer3 = "get_payload()",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 77,
                         CourseId = 4,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какой метод позволяет узнать, имеет ли данное сообщение несколько частей:",
+                        Answer1 = "items()",
+                        Answer2 = "get_payload()",
+                        Answer3 = "is_multipart()",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 78,
                         CourseId = 4,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Что включает в себя Zope:",
+                        Answer1 = "поддержку CGI-сценариев",
+                        Answer2 = "поддержку сценариев DTML",
+                        Answer3 = "СУБД общего назначения",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 79,
                         CourseId = 4,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Что включает в себя Zope:",
+                        Answer1 = "СУБД общего назначения",
+                        Answer2 = "поддержку CGI-сценариев",
+                        Answer3 = "собственный web-сервер",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 80,
                         CourseId = 4,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Как перевести Unicode-строку u в кодировку koi8-r:",
+                        Answer1 = "u.decode(‘koi8-r’)",
+                        Answer2 = "u.encode(‘koi8-r’)",
+                        Answer3 = "string.decode(u, ‘koi8-r’)",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     // Ruby
                     new Test
                     {
                         Id = 81,
                         CourseId = 5,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Где записана сокращенная форма кода ниже: x = x / 3",
+                        Answer1 = "x /= 3",
+                        Answer2 = "Нет сокращенной формы",
+                        Answer3 = "x = / 3",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
                         Id = 82,
                         CourseId = 5,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Чем отличается puts от print:",
+                        Answer1 = "Ничем, оба делают одно и тоже",
+                        Answer2 = "print без пропуска строки, а puts с пропуском",
+                        Answer3 = "puts позволяет выводить переменные, а print только текст",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 83,
                         CourseId = 5,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какой метод позволяет перевести строку в нижний регистр:",
+                        Answer1 = "lowercase()",
+                        Answer2 = "dcase()",
+                        Answer3 = "downcase()",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 84,
                         CourseId = 5,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Где указана пустая переменная (без какого-либо значения):",
+                        Answer1 = "some = 0",
+                        Answer2 = "some = nil",
+                        Answer3 = "some = «»",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 85,
                         CourseId = 5,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "В каком варианте вы получите число без пропуска строки от пользователя:",
+                        Answer1 = "num = gets.to_i",
+                        Answer2 = "num = gets.chomp()",
+                        Answer3 = "num = gets.chomp().to_i",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 86,
                         CourseId = 5,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Как называется самый популярный фреймворк Ruby для веба:",
+                        Answer1 = "Ruby On Rails",
+                        Answer2 = "Ruby Web",
+                        Answer3 = "Ruby Framework",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
                         Id = 87,
                         CourseId = 5,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Динамический, рефлективный, интерпретируемый высокоуровневый язык программирования:",
+                        Answer1 = "Ruby",
+                        Answer2 = "Dylan",
+                        Answer3 = "Scala",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
                         Id = 88,
                         CourseId = 5,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Язык обладает независимой от операционной системы реализацией:",
+                        Answer1 = "одноточности",
+                        Answer2 = "многопоточности",
+                        Answer3 = "релевантности",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 89,
                         CourseId = 5,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "По особенностям синтаксиса Ruby близок к языку:",
+                        Answer1 = "Perl",
+                        Answer2 = "Dylan",
+                        Answer3 = "Scala",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
                         Id = 90,
                         CourseId = 5,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "По особенностям синтаксиса Ruby близок к языку:",
+                        Answer1 = "Dylan",
+                        Answer2 = "Scala",
+                        Answer3 = "Eiffel",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 91,
                         CourseId = 5,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "По объектно-ориентированному подходу Ruby близок к:",
+                        Answer1 = "Smalltalk",
+                        Answer2 = "Scala",
+                        Answer3 = "Dylan",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
                         Id = 92,
                         CourseId = 5,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Некоторые черты языка Ruby взяты из:",
+                        Answer1 = "Eiffel",
+                        Answer2 = "Python",
+                        Answer3 = "Scala",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 93,
                         CourseId = 5,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Некоторые черты языка Ruby взяты из:",
+                        Answer1 = "Perl",
+                        Answer2 = "Scala",
+                        Answer3 = "Lisp",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 94,
                         CourseId = 5,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Некоторые черты языка Ruby взяты из:",
+                        Answer1 = "Eiffel",
+                        Answer2 = "Dylan",
+                        Answer3 = "Perl",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 95,
                         CourseId = 5,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Создатель Ruby:",
+                        Answer1 = "Билл Гейтц",
+                        Answer2 = "Марк Цукербург",
+                        Answer3 = "Юкихиро Мацумото (Matz)",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 96,
                         CourseId = 5,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "В Японии Ruby стал популярным с момента появления первой общедоступной версии в:",
+                        Answer1 = "2005 году",
+                        Answer2 = "1995 году",
+                        Answer3 = "1999 году",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 97,
                         CourseId = 5,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Стабильная версия Ruby 2.0 вышла в феврале этого года:",
+                        Answer1 = "2013",
+                        Answer2 = "2010",
+                        Answer3 = "2015",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
                         Id = 98,
                         CourseId = 5,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Ruby — полностью такой язык:",
+                        Answer1 = "Специфический",
+                        Answer2 = "Объектно-ориентированный",
+                        Answer3 = "Ориентировочно-последовательный",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 99,
                         CourseId = 5,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Ruby использует вызов по соиспользованию (call-by-sharing), хотя в сообществе Ruby часто говорят, что он использует вызов по:",
+                        Answer1 = "Вычислению",
+                        Answer2 = "Памяти",
+                        Answer3 = "Ссылке",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 100,
                         CourseId = 5,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Ruby не поддерживает множественное наследование, но вместо него есть мощный механизм:",
+                        Answer1 = "Фактов",
+                        Answer2 = "Примесей",
+                        Answer3 = "Тем",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     // PHP
                     new Test
                     {
                         Id = 101,
                         CourseId = 6,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Вы передаете ассоциативный массив в функцию sort(). Каким будет результат выполнения функции:",
+                        Answer1 = "массив будут отсортирован по значениям. Ключи элементов отсортированы не будут и не будут сохранены",
+                        Answer2 = "массив будут отсортирован по значениям. Ключи элементов отсортированы не будут, но будут сохранены",
+                        Answer3 = "массив будут отсортирован по ключам. Значения элементов отсортированы не будут",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
                         Id = 102,
                         CourseId = 6,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какую парадигму программирования поддерживает PHP:",
+                        Answer1 = "логическую",
+                        Answer2 = "процедурную",
+                        Answer3 = "логистическую",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 103,
                         CourseId = 6,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какую парадигму программирования поддерживает PHP:",
+                        Answer1 = "логистическую",
+                        Answer2 = "логическую",
+                        Answer3 = "объектно-ориентированную",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 104,
                         CourseId = 6,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какой оператор обозначает равенство значений в языке PHP:",
+                        Answer1 = "==",
+                        Answer2 = "=",
+                        Answer3 = ":=",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
                         Id = 105,
                         CourseId = 6,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Как можно задать массив в языке PHP:",
+                        Answer1 = "$arr[«a»,»b»,»c»] = «q»;",
+                        Answer2 = "$arr («0″=> «a»);",
+                        Answer3 = "$arr = array(«a»,»b»,»c»);",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 106,
                         CourseId = 6,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Как можно задать массив в языке PHP:",
+                        Answer1 = "$arr («0″=> «a»);",
+                        Answer2 = "$arr[0] = «a»;",
+                        Answer3 = "$arr[«a»,»b»,»c»] = «q»;",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 107,
                         CourseId = 6,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какое из утверждений относительно оператора require верно:",
+                        Answer1 = "при использовании внутри условных блоков require не нужно заключать в фигурные скобки",
+                        Answer2 = "require выполняет код указанного в нем файла только один раз",
+                        Answer3 = "require используется для включения в программу содержимого другого файла",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 108,
                         CourseId = 6,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какое из утверждений относительно оператора include верно:",
+                        Answer1 = "include используется для включения в программу содержимого другого файла",
+                        Answer2 = "файл, включаемый с помощью include, должен быть правильным HTML-файлом",
+                        Answer3 = "файл, включаемый с помощью include, может быть любым файлом",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
                         Id = 109,
                         CourseId = 6,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Чем отличается клиент от сервера:",
+                        Answer1 = "сервер создает соединение, а клиент, пользуясь им, передает свой запрос",
+                        Answer2 = " сервер есть часть компьютерной архитектуры сервер-сервер, а клиент – архитектуры клиент-клиент",
+                        Answer3 = "клиент посылает запросы, а сервер обрабатывает их",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 110,
                         CourseId = 6,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Чем отличается клиент от сервера:",
+                        Answer1 = "сервер создает соединение, а клиент, пользуясь им, передает свой запрос",
+                        Answer2 = "клиент отображает данные на экране компьютера пользователя, а сервер предоставляет данные",
+                        Answer3 = "сервер есть часть компьютерной архитектуры сервер-сервер, а клиент – архитектуры клиент-клиент",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 111,
                         CourseId = 6,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "В чем состоит одна из функций сервера:",
+                        Answer1 = "обрабатывать запросы клиента",
+                        Answer2 = "отображать данные на экране компьютера пользователя",
+                        Answer3 = "инициировать соединение с клиентом",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
                         Id = 112,
                         CourseId = 6,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "В чем состоит одна из функций сервера:",
+                        Answer1 = "отображать данные на экране компьютера пользователя",
+                        Answer2 = "запускать процессы, запрошенные клиентом, и возвращать клиенту результаты",
+                        Answer3 = "инициировать соединение с клиентом",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 113,
                         CourseId = 6,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Как можно получить и вывести на экран список всех методов класса, представителем которого является объект:",
+                        Answer1 = "get_class_methods(get_class(объект));",
+                        Answer2 = "get_methods(get_class(объект));",
+                        Answer3 = "get_class_methods(get_class -> объект);",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
                         Id = 114,
                         CourseId = 6,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Имеется объект ($obj) какого-то класса. Требуется получить список всех свойств класса, которому принадлежит объект:",
+                        Answer1 = "get_class_var(get_class($obj));",
+                        Answer2 = "$get_class_vars(get_class->$obj);",
+                        Answer3 = "$vars = get_class_vars(get_class($obj));",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 115,
                         CourseId = 6,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Как можно программно узнать имя класса, представителем которого является объект:",
+                        Answer1 = "get_class(объект);",
+                        Answer2 = "$(get_class->объект);",
+                        Answer3 = "class(объект);",
+                        Answer4 = "нетверного ответа",
+                        CorrectAnswer = 1
                     },
                     new Test
                     {
                         Id = 116,
                         CourseId = 6,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "С помощью какой функции можно получить текущее смещение чтения/записи файла:",
+                        Answer1 = "fread",
+                        Answer2 = "ftell()",
+                        Answer3 = "fseek()",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 117,
                         CourseId = 6,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какая функция добавляет новый элемент в начало массива:",
+                        Answer1 = "array_shift()",
+                        Answer2 = "array_pop()",
+                        Answer3 = "array_unshift()",
+                        Answer4 = "нет верного овтета",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 118,
                         CourseId = 6,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какую функция возвращает метку времени (timestamp):",
+                        Answer1 = "date()",
+                        Answer2 = "strtotime()",
+                        Answer3 = "localtime()",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     },
                     new Test
                     {
                         Id = 119,
                         CourseId = 6,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Какую функция возвращает метку времени (timestamp):",
+                        Answer1 = "localtime()",
+                        Answer2 = "date()",
+                        Answer3 = "time()",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 3
                     },
                     new Test
                     {
                         Id = 120,
                         CourseId = 6,
-                        Question = "",
-                        Answer1 = "",
-                        Answer2 = "",
-                        Answer3 = "",
-                        Answer4 = "",
-                        CorrectAnswer = 0,
-                        Points = 0
+                        Question = "Каким HTTP методом по умолчанию отправляются данные из веб-формы:",
+                        Answer1 = "OPTIONS",
+                        Answer2 = "GET",
+                        Answer3 = "PUT",
+                        Answer4 = "нет верного ответа",
+                        CorrectAnswer = 2
                     }
                 );
-
-            modelBuilder.Entity<Doc>()
-                .HasData(
-                    // C++
-                    new Doc
-                    {
-                        Id = 1,
-                        CourseId = 1,
-                        LessonId = 1,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 2,
-                        CourseId = 1,
-                        LessonId = 2,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 3,
-                        CourseId = 1,
-                        LessonId = 3,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 4,
-                        CourseId = 1,
-                        LessonId = 4,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 5,
-                        CourseId = 1,
-                        LessonId = 5,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 6,
-                        CourseId = 1,
-                        LessonId = 6,
-                        DocName = ""
-                    },
-                    // C#
-                    new Doc
-                    {
-                        Id = 7,
-                        CourseId = 2,
-                        LessonId = 7,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 8,
-                        CourseId = 2,
-                        LessonId = 8,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 9,
-                        CourseId = 2,
-                        LessonId = 9,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 10,
-                        CourseId = 2,
-                        LessonId = 10,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 11,
-                        CourseId = 2,
-                        LessonId = 11,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 12,
-                        CourseId = 2,
-                        LessonId = 12,
-                        DocName = ""
-                    },
-                    // Java
-                    new Doc
-                    {
-                        Id = 13,
-                        CourseId = 3,
-                        LessonId = 13,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 14,
-                        CourseId = 3,
-                        LessonId = 14,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 15,
-                        CourseId = 3,
-                        LessonId = 15,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 16,
-                        CourseId = 3,
-                        LessonId = 16,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 17,
-                        CourseId = 3,
-                        LessonId = 17,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 18,
-                        CourseId = 3,
-                        LessonId = 18,
-                        DocName = ""
-                    },
-                    // Python
-                    new Doc
-                    {
-                        Id = 19,
-                        CourseId = 4,
-                        LessonId = 19,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 20,
-                        CourseId = 4,
-                        LessonId = 20,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 21,
-                        CourseId = 4,
-                        LessonId = 21,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 22,
-                        CourseId = 4,
-                        LessonId = 22,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 23,
-                        CourseId = 4,
-                        LessonId = 23,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 24,
-                        CourseId = 4,
-                        LessonId = 24,
-                        DocName = ""
-                    },
-                    // Ruby
-                    new Doc
-                    {
-                        Id = 25,
-                        CourseId = 5,
-                        LessonId = 25,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 26,
-                        CourseId = 5,
-                        LessonId = 26,
-                        DocName = ""
-                    }, 
-                    new Doc
-                    {
-                        Id = 27,
-                        CourseId = 5,
-                        LessonId = 27,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 28,
-                        CourseId = 5,
-                        LessonId = 28,
-                        DocName = ""
-                    }, 
-                    new Doc
-                    {
-                        Id = 29,
-                        CourseId = 5,
-                        LessonId = 29,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 30,
-                        CourseId = 5,
-                        LessonId = 30,
-                        DocName = ""
-                    },
-                    // PHP
-                    new Doc
-                    {
-                        Id = 31,
-                        CourseId = 6,
-                        LessonId = 31,
-                        DocName = ""
-                    }, 
-                    new Doc
-                    {
-                        Id = 32,
-                        CourseId = 6,
-                        LessonId = 32,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 33,
-                        CourseId = 6,
-                        LessonId = 33,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 34,
-                        CourseId = 6,
-                        LessonId = 34,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 35,
-                        CourseId = 6,
-                        LessonId = 35,
-                        DocName = ""
-                    },
-                    new Doc
-                    {
-                        Id = 36,
-                        CourseId = 6,
-                        LessonId = 36,
-                        DocName = ""
-                    }
-                );
-
-            modelBuilder.Entity<Video>()
-                .HasData(
-                    // C++
-                    new Video
-                    {
-                        Id = 1,
-                        CourseId = 1,
-                        LessonId = 1,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 2,
-                        CourseId = 1,
-                        LessonId = 2,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 3,
-                        CourseId = 1,
-                        LessonId = 3,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 4,
-                        CourseId = 1,
-                        LessonId = 4,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 5,
-                        CourseId = 1,
-                        LessonId = 5,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 6,
-                        CourseId = 1,
-                        LessonId = 6,
-                        VideoName = ""
-                    },
-                    // C#
-                    new Video
-                    {
-                        Id = 7,
-                        CourseId = 2,
-                        LessonId = 7,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 8,
-                        CourseId = 2,
-                        LessonId = 8,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 9,
-                        CourseId = 2,
-                        LessonId = 9,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 10,
-                        CourseId = 2,
-                        LessonId = 10,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 11,
-                        CourseId = 2,
-                        LessonId = 11,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 12,
-                        CourseId = 2,
-                        LessonId = 12,
-                        VideoName = ""
-                    },
-                    // Java
-                    new Video
-                    {
-                        Id = 13,
-                        CourseId = 3,
-                        LessonId = 13,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 14,
-                        CourseId = 3,
-                        LessonId = 14,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 15,
-                        CourseId = 3,
-                        LessonId = 15,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 16,
-                        CourseId = 3,
-                        LessonId = 16,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 17,
-                        CourseId = 3,
-                        LessonId = 17,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 18,
-                        CourseId = 3,
-                        LessonId = 18,
-                        VideoName = ""
-                    },
-                    // Python
-                    new Video
-                    {
-                        Id = 19,
-                        CourseId = 4,
-                        LessonId = 19,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 20,
-                        CourseId = 4,
-                        LessonId = 20,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 21,
-                        CourseId = 4,
-                        LessonId = 21,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 22,
-                        CourseId = 4,
-                        LessonId = 22,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 23,
-                        CourseId = 4,
-                        LessonId = 23,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 24,
-                        CourseId = 4,
-                        LessonId = 24,
-                        VideoName = ""
-                    },
-                    // Ruby
-                    new Video
-                    {
-                        Id = 25,
-                        CourseId = 5,
-                        LessonId = 25,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 26,
-                        CourseId = 5,
-                        LessonId = 26,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 27,
-                        CourseId = 5,
-                        LessonId = 27,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 28,
-                        CourseId = 5,
-                        LessonId = 28,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 29,
-                        CourseId = 5,
-                        LessonId = 29,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 30,
-                        CourseId = 5,
-                        LessonId = 30,
-                        VideoName = ""
-                    },
-                    // PHP
-                    new Video
-                    {
-                        Id = 31,
-                        CourseId = 6,
-                        LessonId = 31,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 32,
-                        CourseId = 6,
-                        LessonId = 32,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 33,
-                        CourseId = 6,
-                        LessonId = 33,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 34,
-                        CourseId = 6,
-                        LessonId = 34,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 35,
-                        CourseId = 6,
-                        LessonId = 35,
-                        VideoName = ""
-                    },
-                    new Video
-                    {
-                        Id = 36,
-                        CourseId = 6,
-                        LessonId = 36,
-                        VideoName = ""
-                    }
-                );
-
-            modelBuilder.Entity<Homework>()
-                .HasData(
-                    // C++
-                    new Homework
-                    {
-                        Id = 1,
-                        CourseId = 1,
-                        LessonId = 1,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 2,
-                        CourseId = 1,
-                        LessonId = 2,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 3,
-                        CourseId = 1,
-                        LessonId = 3,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 4,
-                        CourseId = 1,
-                        LessonId = 4,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 5,
-                        CourseId = 1,
-                        LessonId = 5,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 6,
-                        CourseId = 1,
-                        LessonId = 6,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    // C#
-                    new Homework
-                    {
-                        Id = 7,
-                        CourseId = 2,
-                        LessonId = 7,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 8,
-                        CourseId = 2,
-                        LessonId = 8,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 9,
-                        CourseId = 2,
-                        LessonId = 9,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 10,
-                        CourseId = 2,
-                        LessonId = 10,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 11,
-                        CourseId = 2,
-                        LessonId = 11,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 12,
-                        CourseId = 2,
-                        LessonId = 12,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    // Java
-                    new Homework
-                    {
-                        Id = 13,
-                        CourseId = 3,
-                        LessonId = 13,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 14,
-                        CourseId = 3,
-                        LessonId = 14,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 15,
-                        CourseId = 3,
-                        LessonId = 15,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 16,
-                        CourseId = 3,
-                        LessonId = 16,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 17,
-                        CourseId = 3,
-                        LessonId = 17,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 18,
-                        CourseId = 3,
-                        LessonId = 18,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    // Python
-                    new Homework
-                    {
-                        Id = 19,
-                        CourseId = 4,
-                        LessonId = 19,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 20,
-                        CourseId = 4,
-                        LessonId = 20,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 21,
-                        CourseId = 4,
-                        LessonId = 21,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 22,
-                        CourseId = 4,
-                        LessonId = 22,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 23,
-                        CourseId = 4,
-                        LessonId = 23,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 24,
-                        CourseId = 4,
-                        LessonId = 24,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    // Ruby
-                    new Homework
-                    {
-                        Id = 25,
-                        CourseId = 5,
-                        LessonId = 25,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 26,
-                        CourseId = 5,
-                        LessonId = 26,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 27,
-                        CourseId = 5,
-                        LessonId = 27,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 28,
-                        CourseId = 5,
-                        LessonId = 28,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 29,
-                        CourseId = 5,
-                        LessonId = 29,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 30,
-                        CourseId = 5,
-                        LessonId = 30,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    // PHP
-                    new Homework
-                    {
-                        Id = 31,
-                        CourseId = 6,
-                        LessonId = 31,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 32,
-                        CourseId = 6,
-                        LessonId = 32,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 33,
-                        CourseId = 6,
-                        LessonId = 33,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 34,
-                        CourseId = 6,
-                        LessonId = 34,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 35,
-                        CourseId = 6,
-                        LessonId = 35,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    },
-                    new Homework
-                    {
-                        Id = 36,
-                        CourseId = 6,
-                        LessonId = 36,
-                        Title = "Домашнее задание",
-                        Content = "",
-                        Deadline = new DateOnly(2024, 6, 15)
-                    }
-                );
-
         }
     }
 }

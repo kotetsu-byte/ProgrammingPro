@@ -5,13 +5,14 @@
 <div style="padding: 60px 120px">
     <div style="background-color: white; border-radius: 20px; border: 5px red solid; padding: 20px;">
         <h3>Результаты</h3>
-        <p>@correctAnswerCount правильных ответов из @answerCount</p>
+        <p>Всего отвечено: @answerCount</p>
+        <p>Правильных ответов: @correctAnswerCount</p>
         <button @onclick="() => GoToCourse()">Вернуться к курсу</button>
     </div>
 </div>
 
 @code {
-    [Inject]
+    [Parameter]
     public int CourseId { get; set; }
 
     [Inject]

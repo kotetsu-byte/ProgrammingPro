@@ -11,25 +11,18 @@
     </div>
     <div style="background-color: white; border: 5px solid red; border-radius: 10px; padding: 10px;">
         <h2 style="text-align: center;">Курсы</h2>
-        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
             @if(Courses != null)
             {
                 @foreach (var item in Courses)
                 {
-                    <div>
-                        <img src="@item.ImgName" /><br />
+                    <div style="background: lightblue; border: 1px solid black; border-radius: 5px;">
                         <h3>@item.Name</h3>
                         <p>@item.Description</p>
                         <button @onclick="() => GoToCourse(item.Id)">Перейти</button>
                     </div>
                 }
             }
-        </div>
-    </div>
-    <div style="background-color: white; border: 5px solid blue; border-radius: 10px; padding: 10px;">
-        <h2 style="text-align: center;">Мои курсы</h2>
-        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
-
         </div>
     </div>
 </div>
@@ -40,10 +33,6 @@
 
     ICollection<CourseDto> Courses { get; set; }
 
-    [Inject]
-    IUserCourseRepository _userCourseRepository { get; set; }
-
-    ICollection<UserCourseDto> UserCourses { get; set; }
 
     protected override async Task OnInitializedAsync()
     {

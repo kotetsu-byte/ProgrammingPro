@@ -26,7 +26,6 @@
                     <td>@item.Answer3</td>
                     <td>@item.Answer4</td>
                     <td>@item.CorrectAnswer</td>
-                    <td>@item.Points</td>
                     <td><button @onclick="() => HandleDetailsClick(item.Id)">Детали</button></td>
                     <td><button @onclick="() => HandleEditClick(item.Id)">Изменить</button></td>
                     <td><button @onclick="() => HandleDeleteClick(item.Id)">Удалить</button></td>
@@ -39,8 +38,15 @@
     }
 
     <br />
-    <button @onclick="() => HandleCreateClick()">Создать пользователя</button>
+    <button @onclick="() => HandleCreateClick()">Создать тест</button>
 </div>
+
+<style>
+    table, td, th {
+        border: 1px black solid;
+        border-collapse: collapse;
+    }
+</style>
 
 @code {
     [Parameter]

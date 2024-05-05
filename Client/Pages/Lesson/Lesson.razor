@@ -4,42 +4,11 @@
 <PageTitle>@Model.Title</PageTitle>
 
 <div style="padding: 60px 120px;">
-    <div style="background-color: white; border: 5px solid red; border-radius: 10px;">
+    <div style="background-color: white; border: 5px solid red; border-radius: 10px; padding: 20px;">
         <h1 style="text-align: center;">@Model.Title</h1>
         <p>@Model.Text</p>
-    </div>
-    <div style="background-color: white; border: 5px solid green; border-radius: 10px;">
-        <h3>Видео</h3>
-        @if(Videos != null)
-        {
-            @foreach (var item in Videos)
-            {
-                <video src="@item.VideoName"></video>
-            }
-        }
-    </div>
-    <div style="background-color: white; border: 5px solid blue; border-radius: 10px;">
-        <h3>Документы</h3>
-        @if(Docs != null)
-        {
-            @foreach (var item in Docs)
-            {
-                <a href="@item.DocName" download>@item.DocName</a>
-            }
-        }
-    </div>
-    <div style="background-color: white; border: 5px solid purple; border-radius: 10px;">
-        <h3>Домашние задания</h3>
-        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
-            @if(Homeworks != null)
-            {
-                @foreach (var item in Homeworks)
-                {
-                    <div @onclick="() => GoToHomework(item.Id)" style="background-color: lightblue; border: 3px solid brown; border-radius: 5px;">
-                        <h3>@item.Title</h3>
-                    </div>
-                }
-            }
+        <div style="text-align: center;">
+            <button @onclick="() => GoBack()">Назад</button>
         </div>
     </div>
 </div>
@@ -56,31 +25,14 @@
 
     LessonDto Model { get; set; }
 
-    [Inject]
-    IDocRepository _docRepository { get; set; }
-
-    ICollection<DocDto> Docs { get; set; }
-
-    [Inject]
-    IVideoRepository _videoRepository { get; set; }
-
-    ICollection<VideoDto> Videos { get; set; }
-
-    [Inject]
-    IHomeworkRepository _homeworkRepository { get; set; }
-
-    ICollection<HomeworkDto> Homeworks { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         Model = await _lessonRepository.GetLessonById(CourseId, Id);
-        Docs = await _docRepository.GetAllDocs(CourseId, Id);
-        Videos = await _videoRepository.GetAllVideos(CourseId, Id);
-        Homeworks = await _homeworkRepository.GetAllHomeworks(CourseId, Id);
     }
 
-    void GoToHomework(int? id)
+    void GoBack()
     {
-        _navigation.NavigateTo($"/homework/{CourseId}/{Id}/{id}");
+        _navigation.NavigateTo($"/course/{CourseId}");
     }
 }

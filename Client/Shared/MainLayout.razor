@@ -2,27 +2,18 @@
 @inject NavigationManager _navigation
 
 <div>
-    @if(_navigation.Uri.Contains("/admin"))
-    {
-
-    } else
+    @if(!_navigation.Uri.Contains("/admin"))
     {
         <div>
             <Header />
         </div>
     }
-    <div style="position: fixed; width: 100%; height: 100%; background: url('/img/main-bg.jpg') no-repeat; z-index: -1; background-size: cover;">
-    </div>
+    @if(!_navigation.Uri.Contains("/admin"))
+    {
+        <div style="position: fixed; width: 100%; height: 100%; background: url('/img/main-bg.jpg') no-repeat; z-index: -1; background-size: cover;">
+        </div>
+    }
     <div>
         @Body
     </div>
-    @if(_navigation.Uri.Contains("/admin"))
-    {
-        
-    } else
-    {
-        <div>
-            <Footer />
-        </div>
-    }
 </div>

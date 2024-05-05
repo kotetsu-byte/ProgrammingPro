@@ -12,8 +12,5 @@ namespace ProgrammingPro.Server.Models
         [ForeignKey("Course")]
         public int? CourseId { get; set; }
         public Course? Course { get; set; }
-        public ICollection<Doc>? Docs { get; set; }
-        public ICollection<Video>? Videos { get; set; }
-        public ICollection<Homework>? Homeworks { get; set; }
     }
 }

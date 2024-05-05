@@ -8,9 +8,6 @@
             <tr>
                 <th>Заголовок</th>
                 <th>Текст</th>
-                <th>Документы</th>
-                <th>Видео</th>
-                <th>Домашние задания</th>
                 <th>Детали</th>
                 <th>Изменить</th>
                 <th>Удалить</th>
@@ -20,9 +17,6 @@
                 <tr>
                     <td>@item.Title</td>
                     <td>@item.Text</td>
-                    <td><button @onclick="() => HandleDocsClick(item.Id)">Документы</button></td>
-                    <td><button @onclick="() => HandleVideosClick(item.Id)">Видео</button></td>
-                    <td><button @onclick="() => HandleHomeworksClick(item.Id)">Домашние задания</button></td>
                     <td><button @onclick="() => HandleDetailsClick(item.Id)">Детали</button></td>
                     <td><button @onclick="() => HandleEditClick(item.Id)">Изменить</button></td>
                     <td><button @onclick="() => HandleDeleteClick(item.Id)">Удалить</button></td>
@@ -35,8 +29,15 @@
     }
 
     <br />
-    <button @onclick="() => HandleCreateClick()">Создать пользователя</button>
+    <button @onclick="() => HandleCreateClick()">Создать урок</button>
 </div>
+
+<style>
+    table, td, th {
+        border: 1px black solid;
+        border-collapse: collapse;
+    }
+</style>
 
 @code {
     [Parameter]
@@ -50,21 +51,6 @@
     protected override async Task OnInitializedAsync()
     {
         Lessons = await _lessonRepository.GetAllLessons(CourseId);
-    }
-
-    void HandleDocsClick(int? id)
-    {
-        _navigation.NavigateTo($"/admin/doc/{CourseId}/{id}");
-    }
-
-    void HandleVideosClick(int? id)
-    {
-        _navigation.NavigateTo($"/admin/video/{CourseId}/{id}");
-    }
-
-    void HandleHomeworksClick(int? id)
-    {
-        _navigation.NavigateTo($"/admin/homework/{CourseId}/{id}");
     }
 
     void HandleDetailsClick(int? id)

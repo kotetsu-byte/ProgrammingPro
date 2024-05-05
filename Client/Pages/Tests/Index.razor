@@ -6,10 +6,10 @@
     <div style="background-color: white; border: 5px solid red; border-radius: 10px; padding: 20px;">
         <p>@Model.Question</p>
         <br />
-        <p @onclick="() => HandleAnswerChoice(1)">@Model.Answer1</p>
-        <p @onclick="() => HandleAnswerChoice(2)">@Model.Answer2</p>
-        <p @onclick="() => HandleAnswerChoice(3)">@Model.Answer3</p>
-        <p @onclick="() => HandleAnswerChoice(4)">@Model.Answer4</p>
+        <p class="ans" style="border: 1px dotted gray;" @onclick="() => HandleAnswerChoice(1)">@Model.Answer1</p>
+        <p class="ans" style="border: 1px dotted gray;" @onclick="() => HandleAnswerChoice(2)">@Model.Answer2</p>
+        <p class="ans" style="border: 1px dotted gray;" @onclick="() => HandleAnswerChoice(3)">@Model.Answer3</p>
+        <p class="ans" style="border: 1px dotted gray;" @onclick="() => HandleAnswerChoice(4)">@Model.Answer4</p>
         <br />
         @if(Model != Tests.FirstOrDefault())
         {
@@ -25,6 +25,16 @@
         }
     </div>
 </div>
+
+<style>
+    .ans:hover {
+        background-color: lightblue;
+        cursor: pointer;
+    }
+    .ans:active {
+        background-color: blue;
+    }
+</style>
 
 @code {
     [Parameter]

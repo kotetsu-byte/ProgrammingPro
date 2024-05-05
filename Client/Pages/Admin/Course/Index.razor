@@ -33,8 +33,15 @@
     }
 
     <br />
-    <button @onclick="() => HandleCreateClick()">Создать пользователя</button>
+    <button @onclick="() => HandleCreateClick()">Создать курс</button>
 </div>
+
+<style>
+    table, td, th {
+        border: 1px black solid;
+        border-collapse: collapse;
+    }
+</style>
 
 @code {
     [Inject]
