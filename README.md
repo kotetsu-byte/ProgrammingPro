@@ -5,6 +5,6 @@
 4. На стороне сервера удалите папку Migrations
 5. На консоле Package Manager Console введите следующие команды
 6. drop-database (после этого Y)
-7. add-migration
+7. add-migration Init
 8. update-database
 9. Теперь можете запускать программу!
